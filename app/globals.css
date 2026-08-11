@@ -1,0 +1,471 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   RIFTSCAPE — Minecraft UI design system
+   Full specification: docs/design/minecraft-theme.md
+   Type scale: Minecraft Ten (headers) / Mojang Bold (sub) / Mojang Regular (body)
+   ========================================================================== */
+
+@font-face {
+  font-family: "Minecraft Ten";
+  src: url("/font/Minecraft-Ten.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Mojang Bold";
+  src: url("/font/Mojang-Bold.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Mojang Regular";
+  src: url("/font/Mojang-Regular.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 400;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+
+  /* Minecraft type roles — use these three everywhere. */
+  --font-mc-header: "Minecraft Ten", var(--font-jetbrains), monospace;
+  --font-mc-sub: "Mojang Bold", var(--font-jetbrains), sans-serif;
+  --font-mc-body: "Mojang Regular", var(--font-jetbrains), sans-serif;
+
+  /* Legacy aliases — kept so `font-sans` / `font-mono` resolve to MC faces. */
+  --font-sans: var(--font-mc-body);
+  --font-mono: var(--font-mc-sub);
+}
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --accent: #eab308;
+  --accent-dark: #ca8a04;
+
+  /* Surface ladder — dark to light, every surface sits on a 2px black border. */
+  --mc-void: #000000;
+  --mc-panel: #0a0a0a;
+  --mc-panel-raised: #171717;
+  --mc-slot: #262626;
+
+  /* Rarity ramp — mirrors vanilla item name colors. */
+  --mc-common: #b0b0b0;
+  --mc-rare: #ffff55;
+  --mc-epic: #e070ff;
+  --mc-legendary: #ffaa00;
+  --mc-danger: #ff5555;
+  --mc-success: #55ff55;
+  --mc-info: #55ffff;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-mc-body);
+}
+
+/* --- Pixel geometry -------------------------------------------------------
+   Minecraft UI has no rounded corners; it has notched ones. These clip-paths
+   knock a square out of each corner so panels read as low-res sprites.        */
+
+.pixel-corners {
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+}
+
+.pixel-corners-sm {
+  clip-path: polygon(
+    0 2px, 2px 2px, 2px 0,
+    calc(100% - 2px) 0, calc(100% - 2px) 2px, 100% 2px,
+    100% calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) 100%,
+    2px 100%, 2px calc(100% - 2px), 0 calc(100% - 2px)
+  );
+}
+
+.pixel-corners-lg {
+  clip-path: polygon(
+    0 8px, 8px 8px, 8px 0,
+    calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px,
+    100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%,
+    8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px)
+  );
+}
+
+/* --- Bevels ---------------------------------------------------------------
+   `pixel-slot` = recessed (inventory slot, input, stat chip).
+   `pixel-raised` = extruded (button at rest, hotbar selection).              */
+
+.pixel-slot {
+  box-shadow:
+    inset 2px 2px 0 0 rgba(255, 255, 255, 0.12),
+    inset -2px -2px 0 0 rgba(0, 0, 0, 0.55);
+}
+
+.pixel-raised {
+  box-shadow:
+    inset 2px 2px 0 0 rgba(255, 255, 255, 0.22),
+    inset -2px -2px 0 0 rgba(0, 0, 0, 0.5);
+}
+
+.mc-text-shadow {
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.6);
+}
+
+.pixelated {
+  image-rendering: pixelated;
+}
+
+/* --- Panels ---------------------------------------------------------------
+   `mc-panel` is the base container for every card, modal, and section box.   */
+
+.mc-panel {
+  background-color: rgba(10, 10, 10, 0.92);
+  border: 2px solid var(--mc-void);
+}
+
+.mc-panel-raised {
+  background-color: var(--mc-panel-raised);
+  border: 2px solid var(--mc-void);
+}
+
+/* Small inset chip — recipe ingredients, stat readouts, tags. */
+.mc-chip {
+  background-color: var(--mc-panel-raised);
+  border: 2px solid var(--mc-void);
+}
+
+/* --- Buttons --------------------------------------------------------------
+   Minecraft buttons are stone-gray at rest, lighten on hover, and press in on
+   click (the bevel inverts and the button drops 1px). Motion is stepped, not
+   eased, so it reads as a sprite swap rather than a CSS transition.          */
+
+.mc-btn {
+  position: relative;
+  border: 2px solid var(--mc-void);
+  background-color: #3f3f46;
+  box-shadow:
+    inset 2px 2px 0 0 rgba(255, 255, 255, 0.22),
+    inset -2px -2px 0 0 rgba(0, 0, 0, 0.5);
+  transition:
+    background-color 0.1s steps(2, end),
+    color 0.1s steps(2, end);
+}
+
+.mc-btn:hover:not(:disabled) {
+  background-color: #52525b;
+}
+
+.mc-btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow:
+    inset -2px -2px 0 0 rgba(255, 255, 255, 0.12),
+    inset 2px 2px 0 0 rgba(0, 0, 0, 0.5);
+}
+
+.mc-btn:disabled {
+  background-color: #1c1c1f;
+  box-shadow: inset 2px 2px 0 0 rgba(255, 255, 255, 0.05),
+    inset -2px -2px 0 0 rgba(0, 0, 0, 0.5);
+  cursor: not-allowed;
+}
+
+/* Accent (gold) variant — the single primary action on a page. */
+.mc-btn-accent {
+  background-color: var(--accent);
+  color: #0a0a0a;
+}
+
+.mc-btn-accent:hover:not(:disabled) {
+  background-color: #facc15;
+}
+
+/* Danger (redstone) variant. */
+.mc-btn-danger {
+  background-color: #b91c1c;
+  color: #fee2e2;
+}
+
+.mc-btn-danger:hover:not(:disabled) {
+  background-color: #dc2626;
+}
+
+/* Epic (amethyst) variant — near-black with a purple bevel. Reserved for the
+   Extra Life / revive action, which should read as something you'd rather not
+   need. Pair with `.mc-glow-epic` on a wrapper for the eerie halo.           */
+.mc-btn-epic {
+  background-color: #0a060e;
+  color: var(--mc-epic);
+  box-shadow:
+    inset 2px 2px 0 0 rgba(224, 112, 255, 0.28),
+    inset -2px -2px 0 0 rgba(0, 0, 0, 0.65);
+}
+
+.mc-btn-epic:hover:not(:disabled) {
+  background-color: #170d20;
+  color: #f0b0ff;
+}
+
+.mc-btn-epic:active:not(:disabled) {
+  box-shadow:
+    inset -2px -2px 0 0 rgba(224, 112, 255, 0.18),
+    inset 2px 2px 0 0 rgba(0, 0, 0, 0.65);
+}
+
+/* Eerie amethyst halo. This is the one sanctioned outer glow in the system.
+   It has to live on a WRAPPER: `pixel-corners` clips with `clip-path`, which
+   would clip the halo away if it were on the button itself. Radii are kept
+   inside the parent card's p-6 padding so the enclosing card's own clip-path
+   doesn't shear the halo off mid-falloff.                                    */
+@keyframes eerie-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px rgba(224, 112, 255, 0.2),
+      0 0 18px rgba(168, 85, 247, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 15px rgba(224, 112, 255, 0.45),
+      0 0 32px rgba(168, 85, 247, 0.26);
+  }
+}
+
+.mc-glow-epic {
+  animation: eerie-pulse 3.4s ease-in-out infinite;
+}
+
+/* Redstone pulse — the sale banner's outer glow. This is a scoped exception
+   to the "one sanctioned glow" rule above: it mirrors mc-glow-epic's
+   mechanism (wrapper-level box-shadow, tinted danger-red instead of
+   amethyst) but is reserved exclusively for the sale banner
+   (components/store/SaleBanner.tsx), same as mc-glow-epic is reserved for
+   Extra Life. Do not spread this to other components either.             */
+@keyframes redstone-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px rgba(255, 85, 85, 0.25),
+      0 0 18px rgba(185, 28, 28, 0.12);
+  }
+  50% {
+    box-shadow:
+      0 0 16px rgba(255, 85, 85, 0.5),
+      0 0 34px rgba(185, 28, 28, 0.3);
+  }
+}
+
+.mc-glow-danger {
+  animation: redstone-pulse 3.4s ease-in-out infinite;
+}
+
+/* --- Inputs ---------------------------------------------------------------
+   Text fields are recessed black slots with a gold focus ring.               */
+
+.mc-input {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 2px solid var(--mc-void);
+  box-shadow:
+    inset 2px 2px 0 0 rgba(255, 255, 255, 0.08),
+    inset -2px -2px 0 0 rgba(0, 0, 0, 0.6);
+  font-family: var(--font-mc-body);
+}
+
+.mc-input::placeholder {
+  color: #525252;
+}
+
+.mc-input:focus {
+  outline: none;
+  box-shadow:
+    inset 2px 2px 0 0 rgba(255, 255, 255, 0.08),
+    inset -2px -2px 0 0 rgba(0, 0, 0, 0.6),
+    0 0 0 2px rgba(234, 179, 8, 0.6);
+}
+
+.mc-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- Block textures -------------------------------------------------------
+   Procedural stand-ins for vanilla block tiles. `stone-bg` is the default
+   page ground; `deepslate-bg` marks alternating sections; `dirt-bg` is the
+   footer strip.                                                             */
+
+.stone-bg {
+  background-color: #161616;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(rgba(0, 0, 0, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.35) 1px, transparent 1px);
+  background-size: 32px 32px, 32px 32px, 8px 8px, 8px 8px;
+}
+
+.deepslate-bg {
+  background-color: #0d0d0f;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(rgba(0, 0, 0, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.4) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px, 12px 12px, 12px 12px;
+}
+
+.dirt-bg {
+  background-color: #120e0b;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.4) 1px, transparent 1px);
+  background-size: 16px 16px, 16px 16px;
+}
+
+/* --- Enchantment glint ----------------------------------------------------
+   Reserved for the single highest-value item on a page (Legendary rarity,
+   the "most popular" store tier). Never more than one per viewport.
+
+   The sheen fades in as it enters and out as it leaves, so it never pops at
+   the panel edges. Color and speed are tokens — set `--glint-color` /
+   `--glint-duration` (or use a modifier below) to tint it to a rarity.        */
+
+@keyframes enchant-glint {
+  0% {
+    transform: translateX(-120%) skewX(-20deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(220%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+.enchant-glint {
+  --glint-color: rgba(255, 255, 255, 0.16);
+  --glint-duration: 5s;
+}
+
+.enchant-glint::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 35%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--glint-color),
+    transparent
+  );
+  animation: enchant-glint var(--glint-duration) ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Rarity-tinted sheens. Tinted glints need more alpha than the white one to
+   read at the same strength. */
+.enchant-glint-red {
+  --glint-color: rgba(255, 85, 85, 0.34);
+}
+
+.enchant-glint-gold {
+  --glint-color: rgba(255, 170, 0, 0.3);
+}
+
+/* --- Marquee ----------------------------------------------------------
+   Sliding text strip for the sale banner. Two identical tracks sit back
+   to back and the pair scrolls left by exactly 50%, so the loop point is
+   invisible.                                                             */
+.mc-marquee-track {
+  width: max-content;
+  animation: mc-marquee-scroll 22s linear infinite;
+}
+
+.mc-marquee-content {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding-right: 2.5rem;
+}
+
+@keyframes mc-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mc-marquee-track {
+    animation: none;
+  }
+}
+
+/* --- Scrollbar ------------------------------------------------------------
+   Vanilla scroll handles are flat blocks, not rounded pills.                 */
+
+.mc-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.mc-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.mc-scroll::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border: 1px solid #000;
+}
+
+.mc-scroll::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* --- Disclosure -----------------------------------------------------------
+   Native <details> snaps open. This eases the reveal instead — the one place
+   motion is smooth rather than stepped, because a panel unfolding is a slide,
+   not a sprite swap. `interpolate-size` is what lets `auto` animate; browsers
+   without ::details-content support just snap, which is the old behavior.    */
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+
+  .mc-disclosure::details-content {
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      block-size 0.28s ease,
+      opacity 0.28s ease,
+      content-visibility 0.28s allow-discrete;
+  }
+
+  .mc-disclosure[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
+/* The [+] / [-] toggle stays stepped — it is a sprite, like a button face. */
+.mc-disclosure summary {
+  transition: color 0.1s steps(2, end);
+}
