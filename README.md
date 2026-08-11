@@ -12,7 +12,6 @@ Play at `play.riftscape.net`.
 - [Next.js 16](https://nextjs.org) (App Router) + React 19 + TypeScript
 - Tailwind CSS v4 (config lives in CSS, not `tailwind.config.*`)
 - Supabase (auth + database client)
-- Prisma (`Profile` model) against the Supabase Postgres database
 - Stripe (supporter store checkout)
 - Motion (`motion/react`) for animation
 
@@ -40,13 +39,6 @@ SUPABASE_SERVICE_ROLE_KEY=
 STRIPE_SECRET_KEY=
 ```
 
-### Database
-
-```bash
-npx prisma generate
-npx prisma migrate dev
-```
-
 ## Project structure
 
 ```
@@ -59,7 +51,6 @@ components/
   layout/       Shared chrome (background overlay, etc.)
   ui/           Shared primitives (copy-IP button, sponsor footer)
 lib/            Server/client utilities (e.g. Supabase profile lookup)
-prisma/         Database schema
 ```
 
 ## Scripts
