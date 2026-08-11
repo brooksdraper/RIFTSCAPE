@@ -5,6 +5,8 @@ import { AccountPillSwitcher } from "@/components/home/AccountPillSwitcher";
 import { SponsorFooter } from "@/components/ui/SponsorFooter";
 import "./globals.css";
 
+import { Analytics } from "@vercel/analytics/next";
+
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
@@ -37,6 +39,7 @@ export default async function RootLayout({
         {children}
         <SponsorFooter />
       </body>
+      <Analytics />
     </html>
   );
 }
