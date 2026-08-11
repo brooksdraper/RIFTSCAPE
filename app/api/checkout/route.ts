@@ -1,4 +1,4 @@
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import { getStoreItemById } from "@/lib/store-items";
 import {
   getProfileByCredentials,
@@ -94,7 +94,7 @@ export async function POST(request: Request) {
 
   const origin = new URL(request.url).origin;
 
-  const session = await stripe.checkout.sessions.create({
+  const session = await getStripe().checkout.sessions.create({
     mode: "payment",
     line_items: [
       {

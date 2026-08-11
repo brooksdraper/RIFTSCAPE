@@ -3,7 +3,7 @@ import {
   ENROLLED_DEVICE_COOKIE,
   ENROLLED_DEVICE_COOKIE_MAX_AGE,
 } from "@/lib/account";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import {
   DISCORD_USERNAME_PATTERN,
   MINECRAFT_USERNAME_PATTERN,
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const { error } = await supabaseAdmin.from("profiles").insert({
+  const { error } = await getSupabaseAdmin().from("profiles").insert({
     minecraft_username: minecraftUsername,
     discord_username: discordUsername,
   });

@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 
 export type EnrolledPlayer = {
   id: string;
@@ -17,7 +17,7 @@ export const TIER_RANK: Record<EnrolledPlayer["tier"], number> = {
 };
 
 export async function getEnrolledPlayers(): Promise<EnrolledPlayer[]> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("profiles")
     .select("id, minecraft_username, tier, life_number")
     .order("created_at", { ascending: true });
@@ -33,7 +33,7 @@ export async function getEnrolledPlayers(): Promise<EnrolledPlayer[]> {
 export async function getProfileByMinecraftUsername(
   minecraftUsername: string
 ): Promise<EnrolledPlayer | null> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("profiles")
     .select("id, minecraft_username, tier, life_number, discord_username, created_at")
     .ilike("minecraft_username", minecraftUsername)
@@ -51,7 +51,7 @@ export async function getProfileByCredentials(
   minecraftUsername: string,
   discordUsername: string
 ): Promise<EnrolledPlayer | null> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("profiles")
     .select("id, minecraft_username, tier, life_number")
     .ilike("minecraft_username", minecraftUsername)
