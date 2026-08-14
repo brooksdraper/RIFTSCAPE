@@ -21,11 +21,8 @@ export default async function UserPage() {
         <IdHeader />
 
         {/* IN DEV DISCLAIMER */}
-        <div
-          className="
-        text-center py-4 bg-neutral-950/80 text-red-500 border-2 border-black pixel-corners pixel-slot max-w-md mx-auto my-10"
-        >
-          <p className="text-sm font-medium">
+        <div className="mc-panel pixel-corners pixel-slot border-2 border-black text-center py-4 px-4 max-w-md mx-auto my-10">
+          <p className="font-mc-body text-xs sm:text-sm text-[color:var(--mc-danger)] leading-relaxed">
             *This feature is not ready for release and is currently in
             development. Some features may be missing or incomplete.
           </p>
@@ -34,7 +31,7 @@ export default async function UserPage() {
         {profile ? <IdCard profile={profile} /> : <NoCredentialsNotice />}
 
         {profile && (
-          <p className="mt-8 text-center font-mono text-xs text-foreground/35 max-w-xl mx-auto leading-relaxed">
+          <p className="mt-8 text-center font-mc-body text-[11px] text-foreground/35 max-w-xl mx-auto leading-relaxed">
             Issued by The RIFTSCAPE Network. Registry ID is derived from your
             permanent account record and cannot be reassigned.
           </p>

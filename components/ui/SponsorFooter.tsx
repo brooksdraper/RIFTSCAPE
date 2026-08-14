@@ -38,11 +38,14 @@ export async function SponsorFooter() {
         <details className="mc-disclosure group max-w-2xl text-left">
           <summary className="cursor-pointer list-none text-center text-[9px] text-foreground/25 hover:text-foreground/50 transition-colors">
             <span className="align-super">
-              Legal &amp; attribution
+              Legal &amp; Attribution
               <span className="ml-1 inline-block group-open:hidden">[+]</span>
               <span className="ml-1 hidden group-open:inline-block">[-]</span>
             </span>
           </summary>
+          <p className="mt-3 font-mc-body text-foreground/40 normal-case tracking-normal text-[9px] leading-relaxed">
+            Owned and Operated by RIFTSCAPE Systems Administrator Vanthanyx
+          </p>
           <p className="mt-3 font-mc-body text-foreground/20 normal-case tracking-normal text-[9px] leading-relaxed">
             NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED
             WITH MOJANG OR MICROSOFT. Minecraft is a trademark of Mojang

@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, AnimatePresence } from "motion/react";
 import { WikiItem } from "./wiki-data";
 import { WikiCard } from "./WikiCard";
 
@@ -21,7 +22,12 @@ export function WikiSection({
   return (
     <section id={id} className="scroll-mt-24 mb-16">
       {/* Section Header — creative-inventory tab style */}
-      <div className="flex items-center justify-between gap-4 mb-6 pb-4 border-b-2 border-black">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="flex items-center justify-between gap-4 mb-6 pb-4 border-b-2 border-black"
+      >
         <div className="text-left">
           <div className="flex flex-wrap items-center gap-3">
             <h2 className="font-mc-header text-lg sm:text-xl text-foreground tracking-tight mc-text-shadow">
@@ -35,13 +41,15 @@ export function WikiSection({
             {subtitle}
           </p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map((item) => (
-          <WikiCard key={item.id} item={item} />
-        ))}
+        <AnimatePresence mode="popLayout">
+          {items.map((item, index) => (
+            <WikiCard key={item.id} item={item} index={index} />
+          ))}
+        </AnimatePresence>
       </div>
     </section>
   );

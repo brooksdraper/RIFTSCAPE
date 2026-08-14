@@ -7,7 +7,6 @@ export interface WikiItem {
   iconUrl?: string;
   rarity?: "Common" | "Rare" | "Epic" | "Legendary";
   roleOrType: string;
-  stats: Record<string, string | number>;
   abilitiesOrEffects: string[];
   recipe: string[];
 }
@@ -24,11 +23,6 @@ export const WIKI_DATA: WikiItem[] = [
     iconUrl: "/img/lily_buds.png",
     rarity: "Common",
     roleOrType: "Crafting Ingredient",
-    stats: {
-      "Output Yield": "4x Buds",
-      "Base Ingredient": "Lily of the Valley",
-      "Used For": "Lily Bushel",
-    },
     abilitiesOrEffects: [
       "Crafting Output: 1x Lily of the Valley in crafting grid yields 4x Lily Buds.",
       "Sugar Cane Fiber Note: Place 2x Sugar Cane side-by-side in crafting grid to craft Sugar Cane Fibers.",
@@ -46,11 +40,6 @@ export const WIKI_DATA: WikiItem[] = [
     iconUrl: "/img/sugar_cane_fibers.png",
     rarity: "Common",
     roleOrType: "Crafting Ingredient",
-    stats: {
-      "Crafting Method": "2x Sugar Cane (Side-by-side)",
-      "Primary Use": "Herbal Binding",
-      Yield: "1x Fiber Set",
-    },
     abilitiesOrEffects: [
       "Crafting Pattern: Place 2 Sugar Cane horizontally side-by-side in the crafting grid.",
       "Antidote Binding: Combines with 1x Lily Bud to create the Lily Bushel antidote.",
@@ -68,11 +57,6 @@ export const WIKI_DATA: WikiItem[] = [
     iconUrl: "/img/lily_bushel.png",
     rarity: "Rare",
     roleOrType: "Consumable / Antidote",
-    stats: {
-      "Cures Status": "Infection",
-      "Hunger Saver": "Stops Rapid Depletion",
-      "Poison Block": "100% Prevention",
-    },
     abilitiesOrEffects: [
       "Infection Cure: Instantly purges the Infection debuff on use.",
       "Hunger & Poison Prevention: Halts rapid hunger drain and prevents progression to fatal poison.",
@@ -90,11 +74,6 @@ export const WIKI_DATA: WikiItem[] = [
     iconUrl: "/img/infection.png",
     rarity: "Epic",
     roleOrType: "Status Effect / Debuff",
-    stats: {
-      "Hunger Drain": "Rapid / 5x Rate",
-      Lethality: "High (Leads to Poison)",
-      Remedy: "Lily Bushel",
-    },
     abilitiesOrEffects: [
       "Phase 1 - Rapid Hunger Drain: Drains food levels rapidly until depleted.",
       "Phase 2 - Lethal Poisoning: Once food reaches zero, inflicts continuous poison damage.",

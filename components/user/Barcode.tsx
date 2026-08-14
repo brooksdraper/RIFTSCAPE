@@ -9,7 +9,7 @@ interface BarcodeProps {
   className?: string;
 }
 
-const HEIGHT = 40;
+const HEIGHT = 32;
 
 export function Barcode({ id, className = "" }: BarcodeProps) {
   // Lay the bars out into absolute x offsets so rendering stays pure.
@@ -30,7 +30,8 @@ export function Barcode({ id, className = "" }: BarcodeProps) {
       <svg
         viewBox={`0 0 ${totalWidth} ${HEIGHT}`}
         preserveAspectRatio="none"
-        className="w-full h-10 sm:h-11"
+        shapeRendering="crispEdges"
+        className="w-full h-7 sm:h-8"
         role="img"
         aria-label={`Barcode encoding registry serial ${compactSerial(id)}`}
       >

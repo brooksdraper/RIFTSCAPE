@@ -1,5 +1,5 @@
 /**
- * Display helpers for the RIFTSCAPE ID card.
+ * Display helpers for the RIFTSCAPE player registry card.
  *
  * Every value here is derived deterministically from the profile UUID
  * (public.profiles.id) so a survivor's card always renders identically.
@@ -96,30 +96,6 @@ export function barcodeBars(id: string): BarcodeBar[] {
   );
 
   return bars;
-}
-
-/**
- * Guilloche rosette path (hypotrochoid) for the security seal.
- * `R`/`r` are the fixed and rolling circle radii, `d` the pen offset.
- */
-export function rosettePath(
-  R: number,
-  r: number,
-  d: number,
-  turns = 12,
-  steps = 720
-): string {
-  const points: string[] = [];
-
-  for (let i = 0; i <= steps; i++) {
-    const t = (i / steps) * turns * Math.PI * 2;
-    const k = (R - r) / r;
-    const x = (R - r) * Math.cos(t) + d * Math.cos(k * t);
-    const y = (R - r) * Math.sin(t) - d * Math.sin(k * t);
-    points.push(`${i === 0 ? "M" : "L"}${x.toFixed(2)},${y.toFixed(2)}`);
-  }
-
-  return points.join(" ") + " Z";
 }
 
 /** "2026-08-09T12:00:00Z" -> "09 AUG 2026" (falls back to a dash). */

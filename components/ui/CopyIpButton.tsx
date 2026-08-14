@@ -28,35 +28,66 @@ export function CopyIpButton({
       type="button"
       aria-label="Copy server IP address"
       transition={{ layout: { duration: 0.4, ease: "easeInOut" } }}
-      className={`mc-btn mc-btn-accent pixel-corners px-8 py-4 font-mc-sub text-xs uppercase tracking-widest flex items-center justify-center gap-2 cursor-pointer overflow-hidden ${className}`}
+      className={`mc-btn mc-btn-accent pixel-corners px-4 py-4 font-mc-sub uppercase tracking-widest flex flex-col items-center justify-center gap-2 cursor-pointer overflow-hidden ${className}`}
     >
-      <AnimatePresence mode="popLayout" initial={false}>
+      {/* Inset item slot — swaps between copy and check glyphs */}
+      <span className="w-9 h-9 shrink-0 mc-chip pixel-corners-sm pixel-slot flex items-center justify-center text-accent overflow-hidden">
+        <AnimatePresence mode="wait" initial={false}>
+          {copied ? (
+            <motion.span
+              key="check"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="flex items-center justify-center"
+            >
+              <Check className="w-4 h-4 stroke-[3]" />
+            </motion.span>
+          ) : (
+            <motion.span
+              key="copy"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="flex items-center justify-center"
+            >
+              <Copy className="w-4 h-4 stroke-[2.5]" />
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </span>
+
+      <AnimatePresence mode="wait" initial={false}>
         {copied ? (
           <motion.span
-            key="copied"
-            initial={{ opacity: 0, x: 12 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -12 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
-            className="flex items-center gap-2 whitespace-nowrap"
+            key="copied-label"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="text-xs whitespace-nowrap"
           >
-            <Check className="w-4 h-4 stroke-[3]" />
             Copied!
           </motion.span>
         ) : (
           <motion.span
-            key="copy"
-            initial={{ opacity: 0, x: -12 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 12 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
-            className="flex items-center gap-2 whitespace-nowrap"
+            key="ip-label"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="normal-case tracking-normal text-[10px] leading-tight text-center break-all px-1"
           >
-            <Copy className="w-4 h-4 stroke-[2.5]" />
             {ip}
           </motion.span>
         )}
       </AnimatePresence>
+
+      <span className="font-mc-body normal-case text-[9px] tracking-normal text-black/50">
+        Tap to copy
+      </span>
     </motion.button>
   );
 }
