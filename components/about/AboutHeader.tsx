@@ -47,7 +47,7 @@ export function AboutHeader() {
         className="flex flex-col sm:flex-row flex-wrap gap-3"
       >
         <CopyIpButton
-          ip="play.riftscape.net"
+          ip="riftscape.net"
           variant="inline"
           className="text-xs"
         />

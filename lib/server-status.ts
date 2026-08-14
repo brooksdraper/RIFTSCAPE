@@ -3,6 +3,34 @@ export type ServerStatus = {
   players: number;
 };
 
+export async function getRiftscapeCoreStatus(): Promise<ServerStatus | null> {
+  const rawIp = process.env.RIFTSCAPE_RAW_IP;
+  const port = process.env.RIFTSCAPE_API_PORT;
+  const token = process.env.RIFTSCAPE_API_TOKEN;
+
+  if (!rawIp || !port || !token) {
+    return null;
+  }
+
+  try {
+    const res = await fetch(`${rawIp}:${port}/status`, {
+      headers: { Authorization: `Bearer ${token}` },
+      cache: "no-store",
+      signal: AbortSignal.timeout(5000),
+    });
+
+    if (!res.ok) {
+      return null;
+    }
+
+    const data = await res.json();
+    return { online: data.status === "online", players: data.playerCount ?? 0 };
+  } catch (error) {
+    console.error("Failed to fetch Riftscape core status:", error);
+    return null;
+  }
+}
+
 export async function getServerStatus(host: string): Promise<ServerStatus | null> {
   try {
     const res = await fetch(

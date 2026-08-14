@@ -11,7 +11,7 @@ interface CopyIpButtonProps {
 }
 
 export function CopyIpButton({
-  ip = "play.RIFTSCAPE.net",
+  ip = "RIFTSCAPE.net",
   className = "",
   variant = "square",
 }: CopyIpButtonProps) {

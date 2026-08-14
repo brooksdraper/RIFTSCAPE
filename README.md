@@ -5,7 +5,7 @@ The website for **Riftscape**, a Minecraft server network — currently home to
 challenge. The site handles player enrollment, a supporter store (Stripe
 checkout), player profiles/ID cards, and a wiki for the current season.
 
-Play at `play.riftscape.net`.
+Play at `riftscape.net`.
 
 ## Stack
 
