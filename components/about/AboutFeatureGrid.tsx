@@ -1,33 +1,32 @@
 "use client";
 
 import { motion } from "motion/react";
-import Link from "next/link";
 
 const features = [
   {
     number: "01",
-    title: "Hardcore Factions",
+    title: "Factions & Warfare",
     description:
-      "Form alliances, build impenetrable fortresses, and survive the endless night. If you die, you are banned for the remainder of the 100 days. Trust no one outside your faction.",
+      "Claim land, fortify your base, and go to war on your terms. Raid rival factions for their resources, or band together to survive the horde. Every claim is contested. Every ally is a gamble.",
   },
   {
     number: "02",
-    title: "Custom Map: Sulfuria",
+    title: "Hardcore Modded Ecosystem",
     description:
-      "Explore a beautifully haunting, hand-crafted continent by AquaLessPantsu. Navigate toxic biomes, scavenge ruined cities, and fight for the limited resources that remain.",
+      "Built on an optimized Fabric server hierarchy with custom data packs tuned for brutal survival — proximity voice chat, escalating zombie hordes, rebalanced combat. Progression is earned, not handed out.",
   },
   {
     number: "03",
-    title: "Fabric Enhanced",
+    title: "Chart the World",
     description:
-      "A carefully curated modpack featuring proximity voice chat, brutal zombie hordes, enhanced combat mechanics, and new scavengable loot. Progression is tough, engaging, and ruthless.",
+      "Six charted biomes, faction claims, and landmarks — scout Sulfuria from your browser before you set foot on it. Ground-level reports update as the map is explored.",
   },
 ];
 
-export function FeatureGrid() {
+export function AboutFeatureGrid() {
   return (
     <div className="relative z-10 deepslate-bg border-t-2 border-black">
-      <div className="container mx-auto px-6 py-24">
+      <div className="container mx-auto px-4 sm:px-6 py-24 max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -40,7 +39,6 @@ export function FeatureGrid() {
               key={feature.number}
               className="mc-panel pixel-corners p-6 flex flex-col"
             >
-              {/* Slot-mounted index number */}
               <div className="w-11 h-11 mb-5 mc-chip pixel-corners-sm pixel-slot flex items-center justify-center">
                 <span className="font-mc-header text-sm text-accent mc-text-shadow">
                   {feature.number}
@@ -55,15 +53,6 @@ export function FeatureGrid() {
             </div>
           ))}
         </motion.div>
-
-        <div className="flex justify-center mt-10">
-          <Link
-            href="/about"
-            className="inline-flex items-center text-foreground/60 hover:text-accent font-mc-sub text-xs tracking-widest uppercase transition-colors"
-          >
-            Learn more about the project <span className="ml-2">→</span>
-          </Link>
-        </div>
       </div>
     </div>
   );
