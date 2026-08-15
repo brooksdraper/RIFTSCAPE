@@ -91,7 +91,7 @@ export function HeroSection({ status }: HeroSectionProps) {
         className="grid grid-cols-2 sm:grid-cols-3 sm:grid-rows-2 gap-3 sm:gap-4 w-full max-w-xl sm:max-w-2xl mx-auto"
       >
         <CopyIpButton
-          ip="RIFTSCAPE.net"
+          ip="play.riftscape.net"
           className="col-span-2 sm:col-span-1 sm:row-span-2 h-full min-h-[104px]"
         />
 

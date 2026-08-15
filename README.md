@@ -5,7 +5,7 @@ The website for **Riftscape**, a Minecraft server network — currently home to
 challenge. The site handles player enrollment, a supporter store (Stripe
 checkout), player profiles/ID cards, and a wiki for the current season.
 
-Play at `riftscape.net`.
+Play at `play.riftscape.net`.
 
 ## Stack
 
@@ -42,7 +42,7 @@ STRIPE_SECRET_KEY=
 ## Authentication
 
 Sign-in is **Discord OAuth through Supabase Auth**. There are no passwords and
-no credential form — a survivor's Discord account *is* their identity, and
+no credential form — a survivor's Discord account _is_ their identity, and
 `profiles.id` is the `auth.users` id, so one Discord account can hold exactly
 one survivor slot.
 
@@ -61,14 +61,14 @@ Setup, once per Supabase project:
 
 How the pieces fit:
 
-| File                     | Role                                                     |
-| ------------------------ | -------------------------------------------------------- |
-| `proxy.ts`                  | Refreshes the auth token on every request                |
-| `lib/supabase/server.ts`    | Session-aware client for Server Components / handlers    |
-| `lib/supabase/browser.ts`   | Session-aware client for Client Components               |
-| `lib/auth/sign-in.ts`       | Starts the Discord handshake                              |
-| `app/auth/callback/`        | Trades the OAuth code for a session                      |
-| `lib/auth/profile.ts`       | `getViewer()` — signed in? enrolled? — for the UI        |
+| File                      | Role                                                  |
+| ------------------------- | ----------------------------------------------------- |
+| `proxy.ts`                | Refreshes the auth token on every request             |
+| `lib/supabase/server.ts`  | Session-aware client for Server Components / handlers |
+| `lib/supabase/browser.ts` | Session-aware client for Client Components            |
+| `lib/auth/sign-in.ts`     | Starts the Discord handshake                          |
+| `app/auth/callback/`      | Trades the OAuth code for a session                   |
+| `lib/auth/profile.ts`     | `getViewer()` — signed in? enrolled? — for the UI     |
 
 Enrollment is a second step after sign-in: `/api/enroll` reads the Discord
 identity off the verified session and only accepts a Minecraft username from

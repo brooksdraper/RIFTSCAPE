@@ -46,7 +46,11 @@ export function AboutHeader() {
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
         className="flex flex-col sm:flex-row flex-wrap gap-3"
       >
-        <CopyIpButton ip="riftscape.net" variant="inline" className="text-xs" />
+        <CopyIpButton
+          ip="play.riftscape.net"
+          variant="inline"
+          className="text-xs"
+        />
 
         <a
           href={DISCORD_URL}
