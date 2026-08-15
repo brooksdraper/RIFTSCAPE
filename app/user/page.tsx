@@ -3,7 +3,7 @@ import { BackgroundOverlay } from "@/components/layout/BackgroundOverlay";
 import { IdHeader } from "@/components/user/IdHeader";
 import { IdCard } from "@/components/user/IdCard";
 import { NoCredentialsNotice } from "@/components/user/NoCredentialsNotice";
-import { getCurrentProfile } from "@/lib/profile";
+import { getCurrentProfile } from "@/lib/auth/profile";
 
 export const metadata: Metadata = {
   title: "RIFTSCAPE ID | Player Registry",
@@ -18,15 +18,7 @@ export default async function UserPage() {
       <BackgroundOverlay opacityClass="opacity-20" />
 
       <div className="relative z-10 container mx-auto px-6 pt-12">
-        <IdHeader />
-
-        {/* IN DEV DISCLAIMER */}
-        <div className="mc-panel pixel-corners pixel-slot border-2 border-black text-center py-4 px-4 max-w-md mx-auto my-10">
-          <p className="font-mc-body text-xs sm:text-sm text-[color:var(--mc-danger)] leading-relaxed">
-            *This feature is not ready for release and is currently in
-            development. Some features may be missing or incomplete.
-          </p>
-        </div>
+        <IdHeader hasAccount={!!profile} />
 
         {profile ? <IdCard profile={profile} /> : <NoCredentialsNotice />}
 

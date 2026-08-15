@@ -48,7 +48,7 @@ export function SecuritySeal({ className = "" }: SecuritySealProps) {
         )}
       </svg>
       <span className="font-mc-sub text-[7px] sm:text-[8px] uppercase tracking-widest text-accent/70 leading-none text-center">
-        Verified
+        VFYD
       </span>
     </div>
   );

@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import { Check, Lock } from "lucide-react";
-import { TIER_META, type SupporterItem } from "@/lib/supporter-items";
+import { TIER_META, type SupporterItem } from "@/lib/store/supporter-items";
 
 interface SupporterItemCardProps {
   item: SupporterItem;

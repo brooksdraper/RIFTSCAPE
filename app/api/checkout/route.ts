@@ -1,16 +1,8 @@
-import { getStripe } from "@/lib/stripe";
-import { getStoreItemById } from "@/lib/store-items";
-import {
-  getProfileByCredentials,
-  getProfileByMinecraftUsername,
-  TIER_RANK,
-} from "@/lib/players";
-import { getCurrentProfile } from "@/lib/profile";
-import {
-  DISCORD_USERNAME_PATTERN,
-  MINECRAFT_USERNAME_PATTERN,
-  normalizeDiscordUsername,
-} from "@/lib/validation";
+import { getStripe } from "@/lib/store/stripe";
+import { getStoreItemById } from "@/lib/store/store-items";
+import { getProfileByMinecraftUsername, TIER_RANK } from "@/lib/players";
+import { getCurrentProfile } from "@/lib/auth/profile";
+import { MINECRAFT_USERNAME_PATTERN } from "@/lib/validation";
 
 export async function POST(request: Request) {
   const buyer = await getCurrentProfile();
@@ -23,10 +15,6 @@ export async function POST(request: Request) {
 
   const body = await request.json();
   const itemId = String(body?.itemId ?? "");
-  const recipientUsername = String(body?.minecraftUsername ?? "").trim();
-  const recipientDiscord = normalizeDiscordUsername(
-    String(body?.discordUsername ?? "")
-  );
   const isGift = Boolean(body?.isGift);
 
   const item = getStoreItemById(itemId);
@@ -41,32 +29,29 @@ export async function POST(request: Request) {
     );
   }
 
-  if (!MINECRAFT_USERNAME_PATTERN.test(recipientUsername)) {
-    return Response.json(
-      { error: "Enter a valid Minecraft username." },
-      { status: 400 }
-    );
-  }
+  // Buying for yourself needs no input at all — the session says who you are.
+  // Only a gift has a recipient to name.
+  let recipient = buyer;
 
-  if (!DISCORD_USERNAME_PATTERN.test(recipientDiscord)) {
-    return Response.json(
-      { error: "Enter a valid Discord username." },
-      { status: 400 }
-    );
-  }
+  if (isGift) {
+    const recipientUsername = String(body?.minecraftUsername ?? "").trim();
 
-  const recipient = isGift
-    ? await getProfileByMinecraftUsername(recipientUsername)
-    : await getProfileByCredentials(recipientUsername, recipientDiscord);
-  if (!recipient) {
-    return Response.json(
-      {
-        error: isGift
-          ? "No enrolled account matches that Minecraft username."
-          : "No enrolled account matches that Minecraft and Discord username.",
-      },
-      { status: 404 }
-    );
+    if (!MINECRAFT_USERNAME_PATTERN.test(recipientUsername)) {
+      return Response.json(
+        { error: "Enter a valid Minecraft username." },
+        { status: 400 }
+      );
+    }
+
+    const giftee = await getProfileByMinecraftUsername(recipientUsername);
+    if (!giftee) {
+      return Response.json(
+        { error: "No enrolled account matches that Minecraft username." },
+        { status: 404 }
+      );
+    }
+
+    recipient = giftee;
   }
 
   const isSelfPurchase = recipient.id === buyer.id;
@@ -103,7 +88,7 @@ export async function POST(request: Request) {
           unit_amount: item.priceCents,
           product_data: {
             name: item.name,
-            description: `For ${recipient.minecraft_username}`,
+            description: `For ${recipient.mc_user}`,
             tax_code: "txcd_10201000",
           },
         },
@@ -112,8 +97,8 @@ export async function POST(request: Request) {
     ],
     metadata: {
       itemId: item.id,
-      buyerMinecraftUsername: buyer.minecraft_username,
-      recipientMinecraftUsername: recipient.minecraft_username,
+      buyerMinecraftUsername: buyer.mc_user,
+      recipientMinecraftUsername: recipient.mc_user,
     },
     success_url: `${origin}/store?purchase=success`,
     cancel_url: `${origin}/store?purchase=canceled`,

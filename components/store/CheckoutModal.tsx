@@ -3,24 +3,18 @@
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
-import type { StoreItem } from "@/lib/store-items";
-import {
-  DISCORD_USERNAME_PATTERN,
-  normalizeDiscordUsername,
-} from "@/lib/validation";
+import type { StoreItem } from "@/lib/store/store-items";
 import { Gift, Info } from "lucide-react";
 
 interface CheckoutModalProps {
   item: StoreItem | null;
   defaultRecipient: string;
-  defaultRecipientDiscord?: string;
   onClose: () => void;
 }
 
 export function CheckoutModal({
   item,
   defaultRecipient,
-  defaultRecipientDiscord = "",
   onClose,
 }: CheckoutModalProps) {
   return (
@@ -30,7 +24,6 @@ export function CheckoutModal({
           key={item.id}
           item={item}
           defaultRecipient={defaultRecipient}
-          defaultRecipientDiscord={defaultRecipientDiscord}
           onClose={onClose}
         />
       )}
@@ -41,32 +34,23 @@ export function CheckoutModal({
 interface CheckoutModalContentProps {
   item: StoreItem;
   defaultRecipient: string;
-  defaultRecipientDiscord?: string;
   onClose: () => void;
 }
 
 function CheckoutModalContent({
   item,
   defaultRecipient,
-  defaultRecipientDiscord = "",
   onClose,
 }: CheckoutModalContentProps) {
   const canGift = item.giftable !== false;
   const [isGift, setIsGift] = useState(false);
   const [giftRecipient, setGiftRecipient] = useState("");
-  const [recipientDiscord, setRecipientDiscord] = useState(
-    defaultRecipientDiscord,
-  );
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [message, setMessage] = useState("");
 
-  const recipient =
-    canGift && isGift ? giftRecipient : defaultRecipient;
+  const recipient = canGift && isGift ? giftRecipient : defaultRecipient;
 
-  const normalizedRecipientDiscord = normalizeDiscordUsername(recipientDiscord);
-  const canCheckout =
-    recipient.trim().length > 0 &&
-    DISCORD_USERNAME_PATTERN.test(normalizedRecipientDiscord);
+  const canCheckout = recipient.trim().length > 0;
 
   const handleCheckout = async () => {
     if (!canCheckout) return;
@@ -81,7 +65,6 @@ function CheckoutModalContent({
         body: JSON.stringify({
           itemId: item.id,
           minecraftUsername: recipient,
-          discordUsername: normalizedRecipientDiscord,
           isGift: canGift && isGift,
         }),
       });
@@ -178,14 +161,6 @@ function CheckoutModalContent({
                 )}
               </div>
             </div>
-            <input
-              type="text"
-              required
-              placeholder="Discord Username"
-              value={recipientDiscord}
-              onChange={(e) => setRecipientDiscord(e.target.value)}
-              className="w-full bg-transparent border-t-2 border-black outline-none px-3 py-2.5 font-mc-body text-sm placeholder:text-neutral-600"
-            />
           </div>
 
           {canGift && (

@@ -1,11 +1,11 @@
-import { SALE_CONFIG } from "@/lib/sale-config";
+import { SALE_CONFIG } from "@/lib/store/sale-config";
 
 const MESSAGE = `• ${SALE_CONFIG.discount} — ${SALE_CONFIG.label} — Ends ${SALE_CONFIG.endDateDisplay}`;
 const strip = Array.from({ length: 6 }, () => MESSAGE).join("   ");
 
 /**
  * Sliding promo ribbon for the store hero. Self-guards on SALE_CONFIG.active,
- * so removing the promo is a one-line flip in lib/sale-config.ts — deleting
+ * so removing the promo is a one-line flip in lib/store/sale-config.ts — deleting
  * this file and its import in StoreHeader removes it entirely.
  */
 export function SaleBanner() {

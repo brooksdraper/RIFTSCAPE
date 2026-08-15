@@ -34,7 +34,7 @@ export function SupporterStoreHeader() {
 
         <div className="relative z-10 px-6 py-20 md:py-24 text-center">
           <span className="inline-block mc-panel-raised pixel-corners pixel-slot font-mc-sub text-accent text-[11px] sm:text-xs tracking-widest uppercase px-6 py-2 mb-6 mc-text-shadow">
-            • Supporter Perks
+            Supporter Perks
           </span>
           <h1 className="font-mc-header text-3xl sm:text-4xl md:text-5xl text-white mb-5 mc-text-shadow leading-relaxed">
             Cosmetic <span className="text-accent">Vault</span>

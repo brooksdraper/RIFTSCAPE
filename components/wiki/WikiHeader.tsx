@@ -43,9 +43,18 @@ export function WikiHeader({
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
         className="font-mc-body text-neutral-400 text-sm sm:text-base max-w-2xl mx-auto mb-8 leading-relaxed"
       >
-        Explore tactical consumables and essential crafting recipes in the
-        RIFTSCAPE realm.
+        Explore the custom items and essential crafting recipes in the RIFTSCAPE
+        realm.
       </motion.p>
+
+      <motion.span
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+        className="font-mc-body text-[11px] text-neutral-500 max-w-2xl"
+      >
+        * Note: All entries are subject to change as the season progresses.
+      </motion.span>
 
       {/* Search Input — Minecraft textfield style */}
       <motion.div

@@ -8,7 +8,7 @@ export function EnrolledPlayerGrid({ players }: { players: EnrolledPlayer[] }) {
   return (
     <div className="flex flex-col">
       <span className="mc-panel-raised pixel-corners pixel-slot font-mc-sub text-accent text-[11px] tracking-widest uppercase px-4 py-2 mb-6 self-start mc-text-shadow">
-        • {players.length} Survivors Enrolled
+        {players.length} Survivors Enrolled
       </span>
       <h2 className="font-mc-header text-2xl md:text-3xl mb-8 mc-text-shadow leading-relaxed">
         Enrolled Players
@@ -31,14 +31,14 @@ export function EnrolledPlayerGrid({ players }: { players: EnrolledPlayer[] }) {
               className="mc-chip pixel-corners-sm pixel-slot flex items-center gap-2 py-2 px-2 group"
             >
               <Image
-                src={`https://mc-heads.net/avatar/${encodeURIComponent(player.minecraft_username)}/32`}
-                alt={player.minecraft_username}
+                src={`https://mc-heads.net/avatar/${encodeURIComponent(player.mc_user)}/32`}
+                alt={player.mc_user}
                 width={32}
                 height={32}
                 className="w-6 h-6 shrink-0 pixelated grayscale group-hover:grayscale-0 transition-all duration-300"
               />
               <span className="font-mc-body text-[11px] text-foreground/80 group-hover:text-accent transition-colors duration-300 truncate">
-                {player.minecraft_username}
+                {player.mc_user}
               </span>
             </motion.div>
           ))}

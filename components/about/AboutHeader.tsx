@@ -16,7 +16,7 @@ export function AboutHeader() {
         className="mb-6 mc-panel-raised pixel-corners pixel-slot px-6 py-2 inline-block"
       >
         <span className="font-mc-sub text-accent text-[11px] sm:text-xs tracking-widest uppercase mc-text-shadow">
-          • The Riftscape Project
+          The Riftscape Project
         </span>
       </motion.div>
 
@@ -36,8 +36,8 @@ export function AboutHeader() {
         className="font-mc-body text-sm sm:text-base text-neutral-300/90 max-w-2xl mb-8 leading-relaxed"
       >
         RIFTSCAPE runs Sulfuria — a 100-day hardcore Factions gauntlet where
-        custom Fabric mods, zombie hordes, and rival factions decide
-        who&apos;s still standing on Day 100.
+        custom Fabric mods, zombie hordes, and rival factions decide who&apos;s
+        still standing on Day 100.
       </motion.p>
 
       <motion.div
@@ -46,11 +46,7 @@ export function AboutHeader() {
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
         className="flex flex-col sm:flex-row flex-wrap gap-3"
       >
-        <CopyIpButton
-          ip="riftscape.net"
-          variant="inline"
-          className="text-xs"
-        />
+        <CopyIpButton ip="riftscape.net" variant="inline" className="text-xs" />
 
         <a
           href={DISCORD_URL}

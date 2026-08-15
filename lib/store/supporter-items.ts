@@ -106,7 +106,7 @@ export const supporterCategories: SupporterCategory[] = [
         description:
           "The veteran's marker. Earned once you've put 20 hours into the season.",
         tier: "survivor",
-        glyph: "•",
+        glyph: "⛏",
         command: "/icon pickaxe",
       },
       {

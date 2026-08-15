@@ -3,7 +3,9 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 
-export function IdHeader() {
+export function IdHeader({ hasAccount }: { hasAccount: boolean }) {
+  const statusColor = hasAccount ? "var(--mc-success)" : "var(--mc-danger)";
+
   return (
     <>
       <Link
@@ -22,15 +24,26 @@ export function IdHeader() {
         <span className="inline-flex items-center gap-2 mc-panel-raised pixel-corners pixel-slot border-2 border-black font-mc-sub text-accent text-[11px] tracking-widest uppercase px-6 py-2 mc-text-shadow mb-6">
           <span className="w-2 h-2 bg-accent shrink-0" />
           Player Registry
+          <span className="w-2 h-2 bg-accent shrink-0" />
         </span>
 
         <h1 className="font-mc-header text-3xl sm:text-4xl md:text-5xl text-foreground mb-4 mc-text-shadow leading-relaxed">
           RIFTSCAPE <span className="text-accent">ID</span>
         </h1>
 
-        <p className="font-mc-body text-neutral-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-          Your current RIFTSCAPE member status, issued on enrollment.
-        </p>
+        <div className="flex flex-wrap items-center justify-center gap-2 font-mc-body text-neutral-400 text-sm sm:text-base leading-relaxed">
+          <span>RIFTSCAPE Member Status</span>
+          <span
+            style={{ color: statusColor }}
+            className="inline-flex items-center gap-1.5 mc-chip pixel-corners-sm pixel-slot px-2.5 py-1 font-mc-sub text-[10px] uppercase tracking-widest"
+          >
+            <span
+              style={{ backgroundColor: statusColor }}
+              className="w-1.5 h-1.5 shrink-0"
+            />
+            {hasAccount ? "Active" : "Inactive"}
+          </span>
+        </div>
       </motion.div>
     </>
   );

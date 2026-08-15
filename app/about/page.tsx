@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import Link from "next/link";
 import { AboutHeader } from "@/components/about/AboutHeader";
 import { VisionSection } from "@/components/about/VisionSection";
+import { SulfuriaIntroSection } from "@/components/about/SulfuriaIntroSection";
 import { AboutFeatureGrid } from "@/components/about/AboutFeatureGrid";
 import { RoadmapSection } from "@/components/about/RoadmapSection";
 import { FairPlaySection } from "@/components/about/FairPlaySection";
@@ -29,6 +30,7 @@ export default function AboutPage() {
 
         <AboutHeader />
         <VisionSection />
+        <SulfuriaIntroSection />
       </div>
 
       <div className="relative z-10">

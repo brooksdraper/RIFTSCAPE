@@ -3,19 +3,17 @@
 import { useState } from "react";
 import { StoreCard } from "./StoreCard";
 import { CheckoutModal } from "./CheckoutModal";
-import { storeItems, type StoreItem } from "@/lib/store-items";
+import { storeItems, type StoreItem } from "@/lib/store/store-items";
 
 interface StoreGridProps {
   isLoggedIn: boolean;
   minecraftUsername: string | null;
-  discordUsername: string | null;
   lifeNumber: number | null;
 }
 
 export function StoreGrid({
   isLoggedIn,
   minecraftUsername,
-  discordUsername,
   lifeNumber,
 }: StoreGridProps) {
   const [selectedItem, setSelectedItem] = useState<StoreItem | null>(null);
@@ -36,7 +34,6 @@ export function StoreGrid({
         <CheckoutModal
           item={selectedItem}
           defaultRecipient={minecraftUsername ?? ""}
-          defaultRecipientDiscord={discordUsername ?? ""}
           onClose={() => setSelectedItem(null)}
         />
       )}

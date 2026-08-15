@@ -40,7 +40,7 @@ export function StoreHeader() {
 
           <div className="px-6 pb-20 md:pb-28 text-center">
             <span className="inline-block mc-panel-raised pixel-corners pixel-slot font-mc-sub text-accent text-[11px] sm:text-xs tracking-widest uppercase px-6 py-2 mb-6 mc-text-shadow">
-              • Trading Post
+              Trading Post
             </span>
             <h1 className="font-mc-header text-3xl sm:text-4xl md:text-5xl text-white mb-5 mc-text-shadow leading-relaxed">
               Supply <span className="text-accent">Drop</span>

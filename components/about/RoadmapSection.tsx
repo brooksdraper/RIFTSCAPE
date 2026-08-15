@@ -14,14 +14,14 @@ export function RoadmapSection() {
         className="mb-10 pb-4 border-b-2 border-black"
       >
         <span className="mc-panel-raised pixel-corners pixel-slot font-mc-sub text-accent text-[11px] tracking-widest uppercase px-4 py-2 mb-4 inline-block mc-text-shadow">
-          • The 100-Day Roadmap
+          The 100-Day Roadmap
         </span>
         <h2 className="font-mc-header text-2xl md:text-3xl mb-2 mc-text-shadow leading-relaxed">
           How Sulfuria Unfolds
         </h2>
         <p className="font-mc-body text-xs sm:text-sm text-neutral-400 max-w-2xl leading-relaxed">
-          Six phases, one countdown. Here&apos;s what to expect between
-          spawn and sundown.
+          Six phases, one countdown. Here&apos;s what to expect between spawn
+          and sundown.
         </p>
       </motion.div>
 

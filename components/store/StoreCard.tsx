@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import type { StoreItem, StoreTheme } from "@/lib/store-items";
+import type { StoreItem, StoreTheme } from "@/lib/store/store-items";
 
 interface StoreCardProps {
   item: StoreItem;

@@ -1,5 +1,7 @@
 export type StoreTheme = "yellow" | "red" | "magenta";
 
+export const StoreOpen = false; // Set to true when the store is open for purchases
+
 export interface StoreItem {
   id: string;
   name: string;

@@ -20,19 +20,8 @@ export default function WikiPage() {
       const matchDesc = item.description.toLowerCase().includes(q);
       const matchType = item.roleOrType.toLowerCase().includes(q);
       const matchRecipe = item.recipe.some((r) => r.toLowerCase().includes(q));
-      const matchStats = Object.entries(item.stats).some(
-        ([k, v]) =>
-          k.toLowerCase().includes(q) || String(v).toLowerCase().includes(q),
-      );
 
-      return (
-        matchName ||
-        matchTagline ||
-        matchDesc ||
-        matchType ||
-        matchRecipe ||
-        matchStats
-      );
+      return matchName || matchTagline || matchDesc || matchType || matchRecipe;
     });
   }, [searchQuery]);
 
@@ -105,8 +94,8 @@ export default function WikiPage() {
         {filteredItems.length > 0 && (
           <WikiSection
             id="consumables"
-            title="Tactical Consumables & Crafting Recipes"
-            subtitle="Alchemy brews, potion effects, and required crafting ingredients."
+            title="Custom Additions & Crafting Recipes"
+            subtitle="Ultility items, status effects, and required crafting ingredients."
             items={filteredItems}
           />
         )}

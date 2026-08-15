@@ -3,8 +3,10 @@ import { BackgroundOverlay } from "@/components/layout/BackgroundOverlay";
 import { SupporterStoreHeader } from "@/components/store/SupporterStoreHeader";
 import { SupporterTierStatus } from "@/components/store/SupporterTierStatus";
 import { SupporterCatalog } from "@/components/store/SupporterCatalog";
-import { getCurrentProfile } from "@/lib/profile";
-import type { SupporterViewer } from "@/lib/supporter-items";
+import { getCurrentProfile } from "@/lib/auth/profile";
+import type { SupporterViewer } from "@/lib/store/supporter-items";
+import { StoreLockedNotice } from "@/components/store/StoreLockedNotice";
+import { StoreOpen } from "@/lib/store/store-items";
 
 export default async function SupporterStore() {
   const profile = await getCurrentProfile();
@@ -17,6 +19,18 @@ export default async function SupporterStore() {
     playtimeHours: null,
   };
 
+  if (!StoreOpen) {
+    return (
+      <main className="min-h-screen bg-background text-foreground selection:bg-accent/30 overflow-hidden relative pb-24">
+        <BackgroundOverlay opacityClass="opacity-20" />
+        <div className="relative z-10 container mx-auto px-6 pt-12">
+          <SupporterStoreHeader />
+          <StoreLockedNotice />
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-accent/30 overflow-hidden relative pb-24">
       <BackgroundOverlay opacityClass="opacity-20" />
@@ -24,7 +38,7 @@ export default async function SupporterStore() {
         <SupporterStoreHeader />
         <div className="max-w-6xl mx-auto">
           <SupporterTierStatus
-            minecraftUsername={profile?.minecraft_username ?? null}
+            minecraftUsername={profile?.mc_user ?? null}
             viewer={viewer}
           />
           <SupporterCatalog viewer={viewer} />

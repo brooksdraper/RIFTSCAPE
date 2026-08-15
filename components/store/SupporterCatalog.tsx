@@ -6,7 +6,7 @@ import {
   isUnlocked,
   supporterCategories,
   type SupporterViewer,
-} from "@/lib/supporter-items";
+} from "@/lib/store/supporter-items";
 
 interface SupporterCatalogProps {
   viewer: SupporterViewer;

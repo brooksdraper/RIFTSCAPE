@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, JetBrains_Mono } from "next/font/google";
-import { getCurrentProfile } from "@/lib/profile";
+import { getViewer } from "@/lib/auth/profile";
 import { AccountPillSwitcher } from "@/components/home/AccountPillSwitcher";
 import { SponsorFooter } from "@/components/ui/SponsorFooter";
 import "./globals.css";
@@ -27,7 +27,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const profile = await getCurrentProfile();
+  const viewer = await getViewer();
 
   return (
     <html
@@ -35,7 +35,7 @@ export default async function RootLayout({
       className={`${montserrat.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-mc-body">
-        <AccountPillSwitcher profile={profile} />
+        <AccountPillSwitcher viewer={viewer} />
         {children}
         <SponsorFooter />
       </body>

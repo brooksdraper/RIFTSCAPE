@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { barcodeBars, compactSerial } from "@/lib/riftscape-id";
+import { barcodeBars, compactSerial } from "@/lib/players/riftscape-id";
 
 interface BarcodeProps {
   /** Profile UUID from public.profiles.id — seeds the bar pattern. */

@@ -4,7 +4,9 @@ import { StoreGrid } from "@/components/store/StoreGrid";
 import { SupporterStoreSection } from "@/components/store/SupporterStoreSection";
 import { PurchaseNotice } from "@/components/store/PurchaseNotice";
 import { PurchaseSuccessModal } from "@/components/store/PurchaseSuccessModal";
-import { getCurrentProfile } from "@/lib/profile";
+import { StoreLockedNotice } from "@/components/store/StoreLockedNotice";
+import { getCurrentProfile } from "@/lib/auth/profile";
+import { StoreOpen } from "@/lib/store/store-items";
 
 export default async function Store({
   searchParams,
@@ -13,6 +15,18 @@ export default async function Store({
 }) {
   const profile = await getCurrentProfile();
   const { purchase } = await searchParams;
+
+  if (!StoreOpen) {
+    return (
+      <main className="min-h-screen bg-background text-foreground selection:bg-accent/30 overflow-hidden relative pb-24">
+        <BackgroundOverlay opacityClass="opacity-20" />
+        <div className="relative z-10 container mx-auto px-6 pt-12">
+          <StoreHeader />
+          <StoreLockedNotice />
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-accent/30 overflow-hidden relative pb-24">
@@ -23,8 +37,7 @@ export default async function Store({
         <PurchaseSuccessModal purchase={purchase} />
         <StoreGrid
           isLoggedIn={profile !== null}
-          minecraftUsername={profile?.minecraft_username ?? null}
-          discordUsername={profile?.discord_username ?? null}
+          minecraftUsername={profile?.mc_user ?? null}
           lifeNumber={profile?.life_number ?? null}
         />
         <SupporterStoreSection />

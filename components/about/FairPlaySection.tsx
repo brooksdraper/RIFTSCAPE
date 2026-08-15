@@ -24,18 +24,17 @@ export function FairPlaySection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <span className="mc-panel-raised pixel-corners pixel-slot font-mc-sub text-accent text-[11px] tracking-widest uppercase px-4 py-2 mb-6 inline-block mc-text-shadow">
-            • Community
+            Community Guidelines
           </span>
           <h2 className="font-mc-header text-2xl md:text-3xl mb-5 mc-text-shadow leading-relaxed">
             Fair Play, Real Stakes
           </h2>
           <p className="font-mc-body text-sm sm:text-base text-neutral-300/90 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Permadeath only works if everyone&apos;s playing by the same
-            rules. Riftscape runs active staff coverage, server-side
-            anti-cheat, and zero tolerance for exploits — because losing
-            your one life to a hacker isn&apos;t hardcore, it&apos;s just
-            broken. Bring your best strategy. We&apos;ll make sure it&apos;s
-            a fair fight.
+            Permadeath only works if everyone&apos;s playing by the same rules.
+            Riftscape runs active staff coverage, server-side anti-cheat, and
+            zero tolerance for exploits — because losing your one life to a
+            hacker isn&apos;t hardcore, it&apos;s just broken. Bring your best
+            strategy. We&apos;ll make sure it&apos;s a fair fight.
           </p>
         </motion.div>
 

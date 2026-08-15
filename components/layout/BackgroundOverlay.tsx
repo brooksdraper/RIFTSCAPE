@@ -6,7 +6,9 @@ interface BackgroundOverlayProps {
   opacityClass?: string;
 }
 
-export function BackgroundOverlay({ opacityClass = "opacity-30" }: BackgroundOverlayProps) {
+export function BackgroundOverlay({
+  opacityClass = "opacity-60",
+}: BackgroundOverlayProps) {
   return (
     <div className="fixed inset-0 z-0 stone-bg">
       <Image

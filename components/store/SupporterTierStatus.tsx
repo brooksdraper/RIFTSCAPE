@@ -11,7 +11,7 @@ import {
   meetsSurvivorGate,
   supporterItems,
   type SupporterViewer,
-} from "@/lib/supporter-items";
+} from "@/lib/store/supporter-items";
 
 interface SupporterTierStatusProps {
   minecraftUsername: string | null;

@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { LogOut } from "lucide-react";
-import { clearAccountCookie } from "@/lib/account";
+import { getSupabaseBrowser } from "@/lib/supabase/browser";
 import type { EnrolledPlayer } from "@/lib/players";
+import { AccountPillShell } from "./AccountPillShell";
 
 const TIER_LABEL: Record<EnrolledPlayer["tier"], string> = {
   member: "Member",
@@ -29,37 +30,17 @@ const TIER_PILL_CLASS: Record<EnrolledPlayer["tier"], string> = {
   sponsor: "text-[color:var(--mc-danger)]",
 };
 
-const pillVariants = {
-  initial: { opacity: 0, y: -10 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: { type: "spring" as const, stiffness: 300, damping: 24 },
-  },
-  exit: {
-    opacity: 0,
-    y: -10,
-    transition: { duration: 0.15, ease: "easeIn" as const },
-  },
-};
-
 export function ProfileBanner({ profile }: { profile: EnrolledPlayer }) {
   const router = useRouter();
   const badge = TIER_BADGE[profile.tier];
 
-  const handleLogout = () => {
-    clearAccountCookie();
+  const handleLogout = async () => {
+    await getSupabaseBrowser().auth.signOut();
     router.refresh();
   };
 
   return (
-    <motion.div
-      variants={pillVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      className="sticky top-0 z-50 flex justify-start p-3"
-    >
+    <AccountPillShell>
       <div className="inline-flex items-center gap-3 px-3 py-2 mc-panel-raised pixel-corners pixel-slot font-mc-body text-xs">
         <Link
           href="/user"
@@ -67,14 +48,14 @@ export function ProfileBanner({ profile }: { profile: EnrolledPlayer }) {
           className="flex items-center gap-2 group"
         >
           <Image
-            src={`https://mc-heads.net/avatar/${encodeURIComponent(profile.minecraft_username)}/24`}
-            alt={profile.minecraft_username}
+            src={`https://mc-heads.net/avatar/${encodeURIComponent(profile.mc_user)}/24`}
+            alt={profile.mc_user}
             width={24}
             height={24}
             className="w-5 h-5 shrink-0 pixelated"
           />
           <span className="text-foreground/80 group-hover:text-accent transition-colors mc-text-shadow">
-            {profile.minecraft_username}
+            {profile.mc_user}
           </span>
         </Link>
         <span
@@ -111,6 +92,6 @@ export function ProfileBanner({ profile }: { profile: EnrolledPlayer }) {
           <LogOut size={13} strokeWidth={2} />
         </motion.button>
       </div>
-    </motion.div>
+    </AccountPillShell>
   );
 }

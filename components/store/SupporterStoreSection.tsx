@@ -46,7 +46,7 @@ export function SupporterStoreSection() {
       <div className="relative z-10 px-6 py-16 md:py-20">
         <div className="text-center mb-12">
           <span className="inline-block mc-panel-raised pixel-corners pixel-slot font-mc-sub text-accent text-[11px] sm:text-xs tracking-widest uppercase px-6 py-2 mb-6 mc-text-shadow">
-            • Supporter Perks
+            Supporter Perks
           </span>
           <h2 className="font-mc-header text-2xl md:text-3xl text-white mb-4 mc-text-shadow leading-relaxed">
             Supporter&apos;s <span className="text-accent">Store</span>

@@ -2,8 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { BookOpen, Store as StoreIcon, User } from "lucide-react";
-import { CountdownTimer } from "./CountdownTimer";
+import { BookOpen, Store as StoreIcon } from "lucide-react";
 import { CopyIpButton } from "@/components/ui/CopyIpButton";
 import { DiscordIcon } from "@/components/ui/DiscordIcon";
 import { ScrollHint } from "./ScrollHint";
@@ -26,7 +25,7 @@ export function HeroSection({ status }: HeroSectionProps) {
       >
         <div className="mc-panel-raised pixel-corners pixel-slot px-6 py-2">
           <span className="font-mc-sub text-accent text-[11px] sm:text-xs tracking-widest uppercase mc-text-shadow">
-            • Project Sulfuria // Commencing Aug 21
+            Project Sulfuria // Help us reach 100 Survivors
           </span>
         </div>
 
@@ -56,12 +55,12 @@ export function HeroSection({ status }: HeroSectionProps) {
             >
               {status.online ? "Online" : "Offline"}
             </span>
-            {status.online && (
+            {/*status.online && (
               <span className="inline-flex items-center gap-1 font-mc-body text-foreground/60 normal-case tracking-normal text-[11px]">
                 <User size={12} className="shrink-0" />
                 {status.players.toLocaleString()}
               </span>
-            )}
+            )*/}
           </div>
         )}
       </motion.div>
@@ -83,9 +82,6 @@ export function HeroSection({ status }: HeroSectionProps) {
           *Up to two additional lives may be purchased via the Store.
         </p>
       </motion.div>
-
-      {/* Countdown */}
-      <CountdownTimer />
 
       {/* CTA row — bento grid of actions */}
       <motion.div
