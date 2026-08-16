@@ -51,3 +51,35 @@ export async function lookupMinecraftProfile(
 
   return { uuid: addDashes(data.id), username: data.name };
 }
+
+/**
+ * Resolves a Minecraft UUID to its current username via Mojang's session
+ * server. Used only for display (the field terminal's "not enrolled" plate,
+ * which has a verified mc_uuid but no site profile to read a username off
+ * of) — never for anything identity-bearing, since an unenrolled account has
+ * nothing on RIFTSCAPE to protect.
+ *
+ * Returns null on any non-200 response (unknown uuid, Mojang outage) rather
+ * than throwing — a missing display name there is a cosmetic gap, not a
+ * failure worth surfacing.
+ */
+export async function lookupMinecraftUsername(
+  uuid: string
+): Promise<string | null> {
+  try {
+    const res = await fetch(
+      `https://sessionserver.mojang.com/session/minecraft/profile/${encodeURIComponent(
+        uuid.replace(/-/g, "")
+      )}`,
+      { cache: "no-store" }
+    );
+
+    if (!res.ok) return null;
+
+    const data = (await res.json()) as { name?: string };
+    return data.name ?? null;
+  } catch (error) {
+    console.error("Mojang username lookup failed:", error);
+    return null;
+  }
+}

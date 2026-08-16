@@ -3,10 +3,9 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { Map as MapIcon } from "lucide-react";
-import { PlayerPlate } from "./PlayerPlate";
+import { PlayerPlate, type FieldTerminalPlayer } from "./PlayerPlate";
 import { ServerReadout } from "./ServerReadout";
 import type { ServerStatus } from "@/lib/server-status";
-import type { Viewer } from "@/lib/auth/profile";
 
 type State = "online" | "offline" | "unknown";
 
@@ -18,11 +17,10 @@ const STATE_STYLE: Record<State, { label: string; color: string }> = {
 
 interface ServerScreenProps {
   status: ServerStatus | null;
-  viewer: Viewer;
-  enrolled: number;
+  player: FieldTerminalPlayer;
 }
 
-export function ServerScreen({ status, viewer, enrolled }: ServerScreenProps) {
+export function ServerScreen({ status, player }: ServerScreenProps) {
   const state: State =
     status === null ? "unknown" : status.online ? "online" : "offline";
   const { label, color } = STATE_STYLE[state];
@@ -73,8 +71,8 @@ export function ServerScreen({ status, viewer, enrolled }: ServerScreenProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-        <PlayerPlate viewer={viewer} />
-        <ServerReadout status={status} enrolled={enrolled} />
+        <PlayerPlate player={player} />
+        <ServerReadout />
       </div>
 
       {/* Wide action button, the way a vanilla menu stacks them */}

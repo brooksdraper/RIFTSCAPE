@@ -216,6 +216,30 @@ body {
   color: #f0b0ff;
 }
 
+/* Clickable chip — a `.mc-chip.pixel-slot` tile that fires a command instead
+   of just displaying a stat. Stays recessed at rest so it still reads as a
+   tile; a press digs the bevel in further and drops it 1px, since it has no
+   raised state to invert the way `.mc-btn` does.                            */
+.mc-chip-btn {
+  cursor: pointer;
+  transition: background-color 0.1s steps(2, end);
+}
+
+.mc-chip-btn:hover:not(:disabled) {
+  background-color: #3f3f46;
+}
+
+.mc-chip-btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow:
+    inset 3px 3px 0 0 rgba(0, 0, 0, 0.65),
+    inset -1px -1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+.mc-chip-btn:disabled {
+  cursor: progress;
+}
+
 .mc-btn-epic:active:not(:disabled) {
   box-shadow:
     inset -2px -2px 0 0 rgba(224, 112, 255, 0.18),

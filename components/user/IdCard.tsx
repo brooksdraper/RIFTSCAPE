@@ -143,8 +143,23 @@ export function IdCard({ profile }: { profile: EnrolledPlayer }) {
             {/* Data fields */}
             <div className="flex-1 min-w-0 flex flex-col justify-center gap-2.5">
               <Field label="Minecraft Name">
-                <span className="font-mc-header text-base text-foreground mc-text-shadow leading-tight">
-                  {profile.mc_user}
+                <span className="inline-flex items-center gap-2">
+                  <span className="font-mc-header text-base text-foreground mc-text-shadow leading-tight">
+                    {profile.mc_user}
+                  </span>
+                  {profile.mc_verified_at && (
+                    <span
+                      title="Confirmed via an in-game verification token"
+                      style={{ color: "var(--mc-success)" }}
+                      className="inline-flex items-center gap-1 mc-chip pixel-corners-sm pixel-slot px-1.5 py-0.5 font-mc-sub text-[8px] uppercase tracking-widest"
+                    >
+                      <span
+                        style={{ backgroundColor: "var(--mc-success)" }}
+                        className="w-1.5 h-1.5 shrink-0"
+                      />
+                      Verified
+                    </span>
+                  )}
                 </span>
               </Field>
 

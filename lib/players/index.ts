@@ -8,6 +8,8 @@ export type EnrolledPlayer = {
   mc_user: string;
   /** Permanent Minecraft identity, resolved via Mojang at enrollment. */
   mc_uuid?: string;
+  /** Set once an in-game token has proven mc_uuid belongs to this account. */
+  mc_verified_at?: string | null;
   tier: "member" | "survivor" | "supporter" | "sponsor";
   life_number: number;
   /** Discord snowflake — stable across username changes. */
@@ -59,13 +61,56 @@ export async function getProfileByUserId(
   const { data, error } = await getSupabaseAdmin()
     .from("profiles")
     .select(
-      "id, mc_user, mc_uuid, tier, life_number, dc_nuid, dc_user, dc_avatar_url, created_at"
+      "id, mc_user, mc_uuid, mc_verified_at, tier, life_number, dc_nuid, dc_user, dc_avatar_url, created_at"
     )
     .eq("id", userId)
     .maybeSingle();
 
   if (error) {
     console.error("Failed to fetch profile by user id:", error.message);
+    return null;
+  }
+
+  return data;
+}
+
+/**
+ * Marks the signed-in survivor's Minecraft account as verified. Only ever
+ * call this after `verifyMinecraftToken` has confirmed an in-game token
+ * matches this profile's mc_uuid — never off a client-supplied flag.
+ */
+export async function markMinecraftVerified(userId: string): Promise<void> {
+  const { error } = await getSupabaseAdmin()
+    .from("profiles")
+    .update({ mc_verified_at: new Date().toISOString() })
+    .eq("id", userId);
+
+  if (error) {
+    console.error("Failed to mark Minecraft account verified:", error.message);
+  }
+}
+
+/**
+ * Looks up an enrolled profile by its permanent Minecraft identity. Used by
+ * the in-game field terminal (`/server`), which authenticates a player via a
+ * verified mc_uuid token rather than a Supabase session — so, like
+ * `getProfileByUserId`, this needs the service role to read the mc_uuid
+ * column at all, and callers must only ever pass a `mcUuid` that's already
+ * been through `verifyMinecraftToken`, never one off a request param.
+ */
+export async function getProfileByMcUuid(
+  mcUuid: string
+): Promise<EnrolledPlayer | null> {
+  const { data, error } = await getSupabaseAdmin()
+    .from("profiles")
+    .select(
+      "id, mc_user, mc_uuid, mc_verified_at, tier, life_number, dc_nuid, dc_user, dc_avatar_url, created_at"
+    )
+    .eq("mc_uuid", mcUuid)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Failed to fetch profile by mc_uuid:", error.message);
     return null;
   }
 

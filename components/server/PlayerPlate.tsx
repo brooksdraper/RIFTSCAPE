@@ -1,11 +1,18 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { DiscordIcon } from "@/components/ui/DiscordIcon";
-import { signInWithDiscord } from "@/lib/auth/sign-in";
 import type { EnrolledPlayer } from "@/lib/players";
-import type { Viewer } from "@/lib/auth/profile";
+
+/**
+ * The field terminal identifies its viewer through the in-game token, not a
+ * Supabase session — there is no browser to sign in from inside the
+ * Minecraft client. `invalid` covers a missing, expired, or forged token;
+ * `unenrolled` is a verified Minecraft account with no RIFTSCAPE profile yet.
+ */
+export type FieldTerminalPlayer =
+  | { status: "enrolled"; profile: EnrolledPlayer }
+  | { status: "unenrolled"; mcUser: string }
+  | { status: "invalid" };
 
 const LIVES_TOTAL = 3;
 
@@ -126,7 +133,7 @@ function EnrolledPlate({ profile }: { profile: EnrolledPlayer }) {
   );
 }
 
-/** Signed in with Discord, but never enrolled — nothing to show but the fix. */
+/** A verified Minecraft account with no RIFTSCAPE profile — nothing to show but the fix. */
 function UnenrolledPlate({ name }: { name: string }) {
   return (
     <Frame label="Survivor">
@@ -139,8 +146,7 @@ function UnenrolledPlate({ name }: { name: string }) {
             {name}
           </div>
           <div className="font-mc-body text-xs text-neutral-400 mt-2 leading-relaxed">
-            Signed in, but not enrolled in the run — no life has been issued to
-            you yet.
+            Not enrolled in the run yet — no life has been issued to you.
           </div>
         </div>
       </div>
@@ -148,15 +154,8 @@ function UnenrolledPlate({ name }: { name: string }) {
   );
 }
 
-function SignedOutPlate() {
-  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
-
-  const handleSignIn = async () => {
-    setStatus("loading");
-    const { error } = await signInWithDiscord("/server");
-    if (error) setStatus("error");
-  };
-
+/** Missing, expired, or forged token — the terminal can't tell who's asking. */
+function InvalidTokenPlate() {
   return (
     <Frame label="Survivor">
       <div className="flex items-center gap-5">
@@ -168,32 +167,17 @@ function SignedOutPlate() {
             Unidentified
           </div>
           <div className="font-mc-body text-xs text-neutral-400 mt-1.5 leading-relaxed">
-            Sign in to see your tier and remaining lives.
+            Could not verify your session. Close and reopen the field terminal
+            in-game to reconnect.
           </div>
         </div>
       </div>
-
-      <button
-        type="button"
-        onClick={handleSignIn}
-        disabled={status === "loading"}
-        className="mc-btn pixel-corners mt-5 w-full px-4 py-3.5 font-mc-sub text-[11px] text-accent uppercase tracking-widest inline-flex items-center justify-center gap-2"
-      >
-        <DiscordIcon className="w-4 h-4 shrink-0" />
-        {status === "loading" ? "Connecting..." : "Sign In With Discord"}
-      </button>
-
-      {status === "error" && (
-        <p className="mt-2.5 font-mc-body text-xs text-[color:var(--mc-danger)]">
-          Could not reach Discord. Try again.
-        </p>
-      )}
     </Frame>
   );
 }
 
-export function PlayerPlate({ viewer }: { viewer: Viewer }) {
-  if (viewer.profile) return <EnrolledPlate profile={viewer.profile} />;
-  if (viewer.discord) return <UnenrolledPlate name={viewer.discord.username} />;
-  return <SignedOutPlate />;
+export function PlayerPlate({ player }: { player: FieldTerminalPlayer }) {
+  if (player.status === "enrolled") return <EnrolledPlate profile={player.profile} />;
+  if (player.status === "unenrolled") return <UnenrolledPlate name={player.mcUser} />;
+  return <InvalidTokenPlate />;
 }
