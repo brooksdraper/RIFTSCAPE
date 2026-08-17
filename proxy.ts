@@ -10,19 +10,7 @@ import { createServerClient } from "@supabase/ssr";
  * (Next.js 16 renamed Middleware to Proxy; same mechanism.)
  */
 export async function proxy(request: NextRequest) {
-  /**
-   * Server Components can read headers but not the request URL, and the root
-   * layout needs the path to decide whether to render site chrome (the in-game
-   * screen renders bare). Rebuilt from `request` on every call rather than
-   * cloned once, so the cookie writes below aren't dropped on the way through.
-   */
-  const withPathname = () => {
-    const headers = new Headers(request.headers);
-    headers.set("x-pathname", request.nextUrl.pathname);
-    return NextResponse.next({ request: { headers } });
-  };
-
-  let response = withPathname();
+  let response = NextResponse.next();
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -41,7 +29,7 @@ export async function proxy(request: NextRequest) {
           request.cookies.set(name, value);
         }
 
-        response = withPathname();
+        response = NextResponse.next({ request });
 
         for (const { name, value, options } of cookiesToSet) {
           response.cookies.set(name, value, options);

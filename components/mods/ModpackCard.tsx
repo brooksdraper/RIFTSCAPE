@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import type { Modpack } from "./mods-data";
 
 const THEME_STYLE: Record<
@@ -13,11 +14,11 @@ const THEME_STYLE: Record<
     button: "",
     glint: "",
   },
-  gold: {
-    text: "var(--mc-rare)",
-    border: "#8a8a2a",
-    button: "mc-btn-accent",
-    glint: "enchant-glint-gold",
+  cyan: {
+    text: "var(--mc-info)",
+    border: "#2a8a8a",
+    button: "mc-btn-info",
+    glint: "enchant-glint-cyan",
   },
 };
 
@@ -50,21 +51,14 @@ export function ModpackCard({ pack, index }: ModpackCardProps) {
       )}
 
       <div className="flex items-center gap-3 mb-4">
-        <div className="w-12 h-12 shrink-0 mc-chip pixel-corners-sm pixel-slot flex items-center justify-center p-1.5">
-          <svg
-            className="w-6 h-6"
-            style={{ color: theme.text }}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-            />
-          </svg>
+        <div className="w-12 h-12 shrink-0 mc-chip pixel-corners-sm pixel-slot flex items-center justify-center overflow-hidden p-1.5">
+          <Image
+            src={`/img/${pack.icon}`}
+            alt={pack.name}
+            width={40}
+            height={40}
+            className="w-full h-full object-contain pixelated"
+          />
         </div>
         <div>
           <h2

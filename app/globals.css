@@ -190,6 +190,16 @@ body {
   background-color: #facc15;
 }
 
+/* Info (cyan) variant — matches the cyan-tier card border/glint. */
+.mc-btn-info {
+  background-color: var(--mc-info);
+  color: #0a0a0a;
+}
+
+.mc-btn-info:hover:not(:disabled) {
+  background-color: #7dffff;
+}
+
 /* Danger (redstone) variant. */
 .mc-btn-danger {
   background-color: #b91c1c;
@@ -410,6 +420,10 @@ body {
 
 .enchant-glint-gold {
   --glint-color: rgba(255, 170, 0, 0.3);
+}
+
+.enchant-glint-cyan {
+  --glint-color: rgba(85, 255, 255, 0.3);
 }
 
 /* --- Marquee ----------------------------------------------------------

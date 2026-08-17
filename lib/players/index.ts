@@ -90,32 +90,6 @@ export async function markMinecraftVerified(userId: string): Promise<void> {
   }
 }
 
-/**
- * Looks up an enrolled profile by its permanent Minecraft identity. Used by
- * the in-game field terminal (`/server`), which identifies a player via its
- * `SERVER_TERMINAL_TOKEN` rather than a Supabase session — so, like
- * `getProfileByUserId`, this needs the service role to read the mc_uuid
- * column at all.
- */
-export async function getProfileByMcUuid(
-  mcUuid: string
-): Promise<EnrolledPlayer | null> {
-  const { data, error } = await getSupabaseAdmin()
-    .from("profiles")
-    .select(
-      "id, mc_user, mc_uuid, mc_verified_at, tier, life_number, dc_nuid, dc_user, dc_avatar_url, created_at"
-    )
-    .eq("mc_uuid", mcUuid)
-    .maybeSingle();
-
-  if (error) {
-    console.error("Failed to fetch profile by mc_uuid:", error.message);
-    return null;
-  }
-
-  return data;
-}
-
 /** Used for gift lookups, where only the recipient's Minecraft name is known. */
 export async function getProfileByMinecraftUsername(
   minecraftUsername: string
