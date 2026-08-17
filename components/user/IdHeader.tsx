@@ -22,10 +22,16 @@ export function IdHeader({ hasAccount }: { hasAccount: boolean }) {
         className="text-center mb-10 sm:mb-14"
       >
         <span className="relative inline-flex items-center gap-2 mc-panel-raised pixel-corners pixel-slot border-2 border-black overflow-hidden font-mc-sub text-[11px] tracking-widest uppercase px-6 py-2 mc-text-shadow mb-6 enchant-glint-gold">
-          <span className="w-2 h-2 bg-accent shrink-0" />
+          <span
+            className="w-2 h-2 shrink-0"
+            style={{ backgroundColor: statusColor }}
+          />
           <span className="text-foreground">RIFTSCAPE</span>{" "}
           <span className="text-accent">ID</span>
-          <span className="w-2 h-2 bg-accent shrink-0" />
+          <span
+            className="w-2 h-2 shrink-0"
+            style={{ backgroundColor: statusColor }}
+          />
         </span>
       </motion.div>
     </>
