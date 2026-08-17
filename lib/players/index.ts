@@ -92,11 +92,10 @@ export async function markMinecraftVerified(userId: string): Promise<void> {
 
 /**
  * Looks up an enrolled profile by its permanent Minecraft identity. Used by
- * the in-game field terminal (`/server`), which authenticates a player via a
- * verified mc_uuid token rather than a Supabase session — so, like
+ * the in-game field terminal (`/server`), which identifies a player via its
+ * `SERVER_TERMINAL_TOKEN` rather than a Supabase session — so, like
  * `getProfileByUserId`, this needs the service role to read the mc_uuid
- * column at all, and callers must only ever pass a `mcUuid` that's already
- * been through `verifyMinecraftToken`, never one off a request param.
+ * column at all.
  */
 export async function getProfileByMcUuid(
   mcUuid: string

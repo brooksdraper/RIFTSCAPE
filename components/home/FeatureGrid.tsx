@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
+import { Info, Map as MapIcon } from "lucide-react";
 
 const features = [
   {
@@ -56,12 +57,20 @@ export function FeatureGrid() {
           ))}
         </motion.div>
 
-        <div className="flex justify-center mt-10">
+        <div className="flex flex-wrap justify-center gap-4 mt-10">
           <Link
             href="/about"
-            className="inline-flex items-center text-foreground/60 hover:text-accent font-mc-sub text-xs tracking-widest uppercase transition-colors"
+            className="mc-btn pixel-corners px-6 py-3 font-mc-sub text-xs text-foreground uppercase tracking-widest inline-flex items-center gap-2"
           >
-            Learn more about the project <span className="ml-2">→</span>
+            <Info className="w-4 h-4" strokeWidth={2} />
+            Learn More
+          </Link>
+          <Link
+            href="/map"
+            className="mc-btn pixel-corners px-6 py-3 font-mc-sub text-xs text-foreground uppercase tracking-widest inline-flex items-center gap-2"
+          >
+            <MapIcon className="w-4 h-4" strokeWidth={2} />
+            View Map
           </Link>
         </div>
       </div>

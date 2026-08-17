@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "motion/react";
 import type { EnrolledPlayer } from "@/lib/players";
 
 /**
@@ -46,12 +47,16 @@ function Frame({
   children: React.ReactNode;
 }) {
   return (
-    <div className="pixel-slot pixel-corners border-2 border-black bg-black/60 p-5 flex flex-col">
+    <motion.div
+      layout
+      transition={{ duration: 0.22, ease: "easeOut" }}
+      className="pixel-slot pixel-corners border-2 border-black bg-black/60 p-5 flex flex-col"
+    >
       <span className="font-mc-sub text-[10px] text-neutral-400 uppercase tracking-widest mb-4">
         {label}
       </span>
       {children}
-    </div>
+    </motion.div>
   );
 }
 

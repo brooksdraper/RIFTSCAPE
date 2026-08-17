@@ -6,6 +6,7 @@ import { Map as MapIcon } from "lucide-react";
 import { PlayerPlate, type FieldTerminalPlayer } from "./PlayerPlate";
 import { ServerReadout } from "./ServerReadout";
 import type { ServerStatus } from "@/lib/server-status";
+import type { SupporterViewer } from "@/lib/store/supporter-items";
 
 type State = "online" | "offline" | "unknown";
 
@@ -25,13 +26,25 @@ export function ServerScreen({ status, player }: ServerScreenProps) {
     status === null ? "unknown" : status.online ? "online" : "offline";
   const { label, color } = STATE_STYLE[state];
 
+  // Unlocks run off the account's tag, same as the supporter store. No
+  // playtime source feeds the terminal, so the Survivor-gate progress stays
+  // framework-only here too.
+  const viewer: SupporterViewer = {
+    tier: player.status === "enrolled" ? player.profile.tier : null,
+    playtimeHours: null,
+  };
+
   return (
     // A container GUI opens as a sprite, so this snaps in rather than rising
     // the way the site's pages do.
     <motion.div
+      layout
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.18, ease: "easeOut" }}
+      transition={{
+        default: { duration: 0.18, ease: "easeOut" },
+        layout: { duration: 0.22, ease: "easeOut" },
+      }}
       className="relative z-10 w-full max-w-4xl mc-panel-raised pixel-corners-lg border-2 border-black p-4 sm:p-5"
     >
       {/* Title bar */}
@@ -70,10 +83,14 @@ export function ServerScreen({ status, player }: ServerScreenProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+      <motion.div
+        layout
+        transition={{ duration: 0.22, ease: "easeOut" }}
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"
+      >
         <PlayerPlate player={player} />
-        <ServerReadout />
-      </div>
+        <ServerReadout viewer={viewer} />
+      </motion.div>
 
       {/* Wide action button, the way a vanilla menu stacks them */}
       <Link

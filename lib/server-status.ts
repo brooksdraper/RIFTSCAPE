@@ -23,10 +23,28 @@ export async function getRiftscapeCoreStatus(): Promise<ServerStatus | null> {
       return null;
     }
 
-    const data = await res.json();
+    // The core mod's "server" field is a §-formatted MOTD containing a raw,
+    // unescaped newline, which makes the field invalid JSON; strip it out
+    // before parsing since it's unused here anyway.
+    const text = (await res.text()).replace(
+      /"server"\s*:\s*"(?:\\.|[^"\\])*"\s*,\s*|,?\s*"server"\s*:\s*"(?:\\.|[^"\\])*"/,
+      ""
+    );
+
+    let data: { status?: string; playerCount?: number };
+    try {
+      data = JSON.parse(text);
+    } catch {
+      console.error("Riftscape core status response was not valid JSON");
+      return null;
+    }
+
     return { online: data.status === "online", players: data.playerCount ?? 0 };
   } catch (error) {
-    console.error("Failed to fetch Riftscape core status:", error);
+    console.error(
+      "Failed to fetch Riftscape core status:",
+      error instanceof Error ? error.message : String(error)
+    );
     return null;
   }
 }

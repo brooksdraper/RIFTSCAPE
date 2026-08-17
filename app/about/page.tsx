@@ -3,7 +3,6 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { AboutHeader } from "@/components/about/AboutHeader";
-import { VisionSection } from "@/components/about/VisionSection";
 import { SulfuriaIntroSection } from "@/components/about/SulfuriaIntroSection";
 import { AboutFeatureGrid } from "@/components/about/AboutFeatureGrid";
 import { RoadmapSection } from "@/components/about/RoadmapSection";
@@ -29,7 +28,6 @@ export default function AboutPage() {
         </motion.div>
 
         <AboutHeader />
-        <VisionSection />
         <SulfuriaIntroSection />
       </div>
 

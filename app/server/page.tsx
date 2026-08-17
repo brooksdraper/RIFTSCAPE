@@ -2,8 +2,7 @@ import { ServerScreen } from "@/components/server/ServerScreen";
 import type { FieldTerminalPlayer } from "@/components/server/PlayerPlate";
 import { getRiftscapeCoreStatus } from "@/lib/server-status";
 import { getProfileByMcUuid } from "@/lib/players";
-import { lookupMinecraftUsername } from "@/lib/players/mojang";
-import { verifyMinecraftToken } from "@/lib/auth/mc-verify";
+import { parseServerTerminalToken } from "@/lib/auth/mc-verify";
 
 export const metadata = {
   title: "RIFTSCAPE | Field Terminal",
@@ -12,23 +11,23 @@ export const metadata = {
 
 /**
  * The terminal is opened from inside the Minecraft client, which has no
- * Discord session to read — the RIFTSCAPE server mints a fresh mc_uuid token
- * every time a player opens it, so `token` is always present in practice.
- * Verifying it here is what stands in for sign-in on this page.
+ * Discord session to read — the RIFTSCAPE server mints a fresh
+ * `SERVER_TERMINAL_TOKEN` every time a player opens it, so it's always
+ * present in practice. Parsing it here is what stands in for sign-in on this
+ * page.
  */
 async function resolveFieldTerminalPlayer(
-  token: string | undefined
+  serverTerminalToken: string | undefined
 ): Promise<FieldTerminalPlayer> {
-  if (!token) return { status: "invalid" };
+  if (!serverTerminalToken) return { status: "invalid" };
 
-  const mcUuid = await verifyMinecraftToken(token);
-  if (!mcUuid) return { status: "invalid" };
+  const parsed = parseServerTerminalToken(serverTerminalToken);
+  if (!parsed) return { status: "invalid" };
 
-  const profile = await getProfileByMcUuid(mcUuid);
+  const profile = await getProfileByMcUuid(parsed.mcUuid);
   if (profile) return { status: "enrolled", profile };
 
-  const mcUser = await lookupMinecraftUsername(mcUuid);
-  return { status: "unenrolled", mcUser: mcUser ?? "Unknown Survivor" };
+  return { status: "unenrolled", mcUser: parsed.mcUsername };
 }
 
 /**
@@ -40,13 +39,13 @@ async function resolveFieldTerminalPlayer(
 export default async function ServerPage({
   searchParams,
 }: {
-  searchParams: Promise<{ token?: string }>;
+  searchParams: Promise<{ SERVER_TERMINAL_TOKEN?: string }>;
 }) {
-  const { token } = await searchParams;
+  const { SERVER_TERMINAL_TOKEN } = await searchParams;
 
   const [status, player] = await Promise.all([
     getRiftscapeCoreStatus(),
-    resolveFieldTerminalPlayer(token),
+    resolveFieldTerminalPlayer(SERVER_TERMINAL_TOKEN),
   ]);
 
   return (

@@ -57,7 +57,7 @@ export function SulfuriaIntroSection() {
           A brutal island. A short clock. No room for weakness.
         </h2>
         <p className="font-mc-body text-sm sm:text-base text-neutral-300/90 leading-relaxed">
-          Sulfuria is a 100-day hardcore survival gauntlet where every decision
+          Sulfuria is a 100-day hardcore survival challenge where every decision
           matters. The island is hostile, the timing is unforgiving, and the
           difference between survival and disaster is often a matter of
           preparation, teamwork, and nerve. If you are stepping in, learn the

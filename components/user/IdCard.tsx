@@ -27,7 +27,10 @@ const TIER_BADGE: Record<EnrolledPlayer["tier"], string | null> = {
 };
 
 /** Mirrors the wiki/store rarity ramp: tier name color + muted card border. */
-const TIER_STYLE: Record<EnrolledPlayer["tier"], { text: string; border: string }> = {
+const TIER_STYLE: Record<
+  EnrolledPlayer["tier"],
+  { text: string; border: string }
+> = {
   member: { text: "var(--mc-common)", border: "#3f3f3f" },
   survivor: { text: "var(--mc-info)", border: "#2a6a6a" },
   supporter: { text: "var(--mc-rare)", border: "#8a8a2a" },
@@ -143,23 +146,8 @@ export function IdCard({ profile }: { profile: EnrolledPlayer }) {
             {/* Data fields */}
             <div className="flex-1 min-w-0 flex flex-col justify-center gap-2.5">
               <Field label="Minecraft Name">
-                <span className="inline-flex items-center gap-2">
-                  <span className="font-mc-header text-base text-foreground mc-text-shadow leading-tight">
-                    {profile.mc_user}
-                  </span>
-                  {profile.mc_verified_at && (
-                    <span
-                      title="Confirmed via an in-game verification token"
-                      style={{ color: "var(--mc-success)" }}
-                      className="inline-flex items-center gap-1 mc-chip pixel-corners-sm pixel-slot px-1.5 py-0.5 font-mc-sub text-[8px] uppercase tracking-widest"
-                    >
-                      <span
-                        style={{ backgroundColor: "var(--mc-success)" }}
-                        className="w-1.5 h-1.5 shrink-0"
-                      />
-                      Verified
-                    </span>
-                  )}
+                <span className="font-mc-header text-base text-foreground mc-text-shadow leading-tight">
+                  {profile.mc_user}
                 </span>
               </Field>
 
@@ -198,21 +186,31 @@ export function IdCard({ profile }: { profile: EnrolledPlayer }) {
                   </span>
                 </div>
 
-                <Field label="Life">
-                  <span className="inline-flex items-center gap-1.5 text-[color:var(--mc-danger)] whitespace-nowrap">
+                <div>
+                  <div className="font-mc-sub text-[10px] tracking-widest uppercase text-accent/60 mb-1">
+                    Life
+                  </div>
+                  <span className="inline-flex items-center gap-1 mc-chip pixel-corners-sm pixel-slot px-2 py-1 font-mc-sub text-[11px] uppercase tracking-wider text-[color:var(--mc-danger)] whitespace-nowrap">
                     <Image
                       src="/img/hardcore-64x64.png"
                       alt=""
                       aria-hidden
                       width={64}
                       height={64}
-                      className="w-3.5 h-3.5 pixelated"
+                      className="w-3 h-3 pixelated"
                     />
                     {String(profile.life_number).padStart(2, "0")} / 03
                   </span>
-                </Field>
+                </div>
 
-                <Field label="Season">BETA.1</Field>
+                <div>
+                  <div className="font-mc-sub text-[10px] tracking-widest uppercase text-accent/60 mb-1">
+                    Season
+                  </div>
+                  <span className="inline-flex items-center mc-chip pixel-corners-sm pixel-slot px-2 py-1 font-mc-sub text-[11px] uppercase tracking-wider text-foreground/80">
+                    BETA.1
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -222,7 +220,10 @@ export function IdCard({ profile }: { profile: EnrolledPlayer }) {
             <div className="mc-chip pixel-slot flex-1 min-w-0 px-3 py-2">
               <Barcode id={profile.id} className="text-accent" />
             </div>
-            <SecuritySeal className="shrink-0 w-14 h-14" />
+            <SecuritySeal
+              verified={Boolean(profile.mc_verified_at)}
+              className="shrink-0 w-14 h-14"
+            />
           </div>
 
           {/* ── Machine-readable zone ────────────────────────────── */}

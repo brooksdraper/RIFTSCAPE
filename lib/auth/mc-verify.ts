@@ -50,3 +50,23 @@ export async function verifyMinecraftToken(
     return null;
   }
 }
+
+/**
+ * Parses the `?SERVER_TERMINAL_TOKEN=` the field terminal (`/server`) is
+ * opened with: `{mc_username}.{mc_uuid}`, plain — not a signed JWT. The
+ * terminal is only ever launched from a URL the RIFTSCAPE server itself
+ * generates inside the game client, so there's no bearer to authenticate
+ * against; this just splits the two identity fields back apart.
+ */
+export function parseServerTerminalToken(
+  token: string
+): { mcUsername: string; mcUuid: string } | null {
+  const separatorIndex = token.indexOf(".");
+  if (separatorIndex === -1) return null;
+
+  const mcUsername = token.slice(0, separatorIndex);
+  const mcUuid = token.slice(separatorIndex + 1);
+  if (!mcUsername || !mcUuid) return null;
+
+  return { mcUsername, mcUuid };
+}
