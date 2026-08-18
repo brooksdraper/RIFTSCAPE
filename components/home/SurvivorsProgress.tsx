@@ -1,6 +1,6 @@
 import { getEnrolledPlayers } from "@/lib/players";
 
-const SURVIVORS_REQUIRED = 100;
+const SURVIVORS_REQUIRED = 50;
 
 export async function SurvivorsProgress() {
   const players = await getEnrolledPlayers();
@@ -22,19 +22,19 @@ export async function SurvivorsProgress() {
             }`}
           >
             {thresholdMet
-              ? "100+ Survivors Enrolled"
+              ? "50+ Survivors Enrolled"
               : "Minimum Survivors Not Met"}
           </span>
 
           <h2 className="font-mc-header text-2xl md:text-3xl mb-4 mc-text-shadow leading-relaxed">
             {thresholdMet
               ? "Sulfuria Launches on Day 0"
-              : "100 Survivors To Launch"}
+              : "50 Survivors To Launch"}
           </h2>
 
           <p className="font-mc-body text-sm text-foreground/70 max-w-xl mb-8 leading-relaxed">
             {thresholdMet
-              ? "100 survivors have enrolled. The countdown for Day 0 begins soon."
+              ? "50 survivors have enrolled. The countdown for Day 0 begins soon."
               : `Sulfuria begins the live countdown for release once ${SURVIVORS_REQUIRED} survivors have enrolled. ${remaining} more to go.`}
           </p>
 

@@ -281,7 +281,7 @@ export const supporterCategories: SupporterCategory[] = [
     id: "emotes",
     title: "Emotes & Commands",
     subtitle:
-      "Cosmetic commands. None of them affect combat, loot, or the 100-day timer.",
+      "Cosmetic commands. None of them affect combat, loot, or the 60-day timer.",
     items: [
       {
         id: "cmd-wave",

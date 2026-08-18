@@ -63,7 +63,7 @@ export const storeItems: StoreItem[] = [
     price: "$12.99",
     priceCents: 1299,
     description:
-      "Cheated death? Buy a second chance. Single-use item that revives you if you fall during the 100 days.",
+      "Cheated death? Buy a second chance. Single-use item that revives you if you fall during the 60 days.",
     features: ["Single-Use Revive", "Max 2 Per Season", "Cannot Be Gifted"],
     popular: false,
     giftable: false,

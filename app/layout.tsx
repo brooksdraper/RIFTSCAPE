@@ -19,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "RIFTSCAPE | Sulfuria Hardcore ",
-  description: "100 Days Zombie Apocalypse Factions Hardcore Challenge",
+  description: "60 Days Zombie Apocalypse Factions Hardcore Challenge",
 };
 
 export default async function RootLayout({

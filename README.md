@@ -1,7 +1,7 @@
 # Riftscape Network
 
 The website for **Riftscape**, a Minecraft server network — currently home to
-**Project Sulfuria**, a 100-day zombie apocalypse Factions Hardcore
+**Project Sulfuria**, a 60-day zombie apocalypse Factions Hardcore
 challenge. The site handles player enrollment, a supporter store (Stripe
 checkout), player profiles/ID cards, and a wiki for the current season.
 

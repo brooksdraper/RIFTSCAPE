@@ -5,21 +5,21 @@ import { motion } from "motion/react";
 const features = [
   {
     number: "01",
-    title: "Factions & Warfare",
+    title: "Zombie Hordes",
     description:
-      "Claim land, fortify your base, and go to war on your terms. Raid rival factions for their resources, or band together to survive the horde. Every claim is contested. Every ally is a gamble.",
+      "The world is a pressure cooker. Zombies are a constant threat, and the server loop is designed to keep players on their toes. The map, events, and mechanics are all tuned to create danger that makes every decision matter.",
   },
   {
     number: "02",
-    title: "Hardcore Modded Ecosystem",
+    title: "Factions & Territory",
     description:
-      "Built on an optimized Fabric server hierarchy with custom data packs tuned for brutal survival — proximity voice chat, escalating zombie hordes, rebalanced combat. Progression is earned, not handed out.",
+      "Players can organize into groups, establish claims, and build defensible bases as the world gets more dangerous. Faction structure is part of the server loop, and raids are a real risk instead of a side activity.",
   },
   {
     number: "03",
-    title: "Chart the World",
+    title: "The World & The Community",
     description:
-      "Six charted biomes, faction claims, and landmarks — scout Sulfuria from your browser before you set foot on it. Ground-level reports update as the map is explored.",
+      "The map, wiki, Discord, and server systems work together to help players understand the world before they commit. This is a project built around clear expectations and a community that thrives on the pressure of a short, brutal campaign.",
   },
 ];
 

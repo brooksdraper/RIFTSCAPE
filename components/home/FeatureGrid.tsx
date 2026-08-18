@@ -9,7 +9,7 @@ const features = [
     number: "01",
     title: "Hardcore Factions",
     description:
-      "Form alliances, build impenetrable fortresses, and survive the endless night. If you die, you are banned for the remainder of the 100 days. Trust no one outside your faction.",
+      "Form alliances, build impenetrable fortresses, and survive the endless night. If you die, you are banned for the remainder of the 60 days. Trust no one outside your faction.",
   },
   {
     number: "02",

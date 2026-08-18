@@ -47,7 +47,7 @@ export function SupporterStoreHeader() {
           <p className="font-mc-body text-[11px] text-foreground/50 max-w-xl mx-auto leading-relaxed">
             Tags are cumulative: each one unlocks everything below it, so a
             Sponsor holds the whole vault. Cosmetics are cosmetic — none of them
-            affect combat, loot, or the 100-day timer, and all of them reset at
+            affect combat, loot, or the 60-day timer, and all of them reset at
             the end of the season.
           </p>
         </div>

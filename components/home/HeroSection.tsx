@@ -25,7 +25,7 @@ export function HeroSection({ status }: HeroSectionProps) {
       >
         <div className="mc-panel-raised pixel-corners pixel-slot px-6 py-2">
           <span className="font-mc-sub text-accent text-[11px] sm:text-xs tracking-widest uppercase mc-text-shadow">
-            Project Sulfuria // Help us reach 100 Survivors
+            Project Sulfuria // Help us reach 50 Survivors
           </span>
         </div>
 
@@ -75,7 +75,7 @@ export function HeroSection({ status }: HeroSectionProps) {
           Sulfuria
         </h1>
         <p className="font-mc-body text-base md:text-lg text-foreground/80 max-w-2xl mx-auto mb-3 leading-relaxed">
-          A 100-Day Zombie Apocalypse Factions Hardcore Challenge. Custom map.
+          A 60-Day Zombie Apocalypse Factions Hardcore Challenge. Custom map.
           Fabric mods. One life.*
         </p>
         <p className="font-mc-body text-[11px] text-foreground/40 max-w-xl mx-auto mb-10">

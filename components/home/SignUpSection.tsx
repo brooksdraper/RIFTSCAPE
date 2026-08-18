@@ -103,13 +103,13 @@ export function SignUpSection({ viewer }: { viewer: Viewer }) {
         Sign Up
       </h2>
       <p className="font-mc-body text-sm text-neutral-300/90 leading-relaxed mb-3">
-        Welcome to RIFTSCAPE&apos;s first 100-day challenge. Sign in with
+        Welcome to RIFTSCAPE&apos;s first 60-day challenge. Sign in with
         Discord, then claim your Minecraft username to enroll. One life.* Make
         it count.
       </p>
       <p className="font-mc-body text-[11px] text-foreground/40 mb-10 leading-relaxed">
         *Up to two additional lives may be purchased via the Store. Accounts
-        submitted here are held for the duration of the 100-Day challenge and
+        submitted here are held for the duration of the 60-Day challenge and
         completely wiped once it concludes. One survivor per Discord account.
       </p>
 

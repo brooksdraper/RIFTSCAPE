@@ -14,7 +14,7 @@ export function RoadmapSection() {
         className="mb-10 pb-4 border-b-2 border-black"
       >
         <span className="mc-panel-raised pixel-corners pixel-slot font-mc-sub text-accent text-[11px] tracking-widest uppercase px-4 py-2 mb-4 inline-block mc-text-shadow">
-          The 100-Day Roadmap
+          The 60-Day Roadmap
         </span>
         <h2 className="font-mc-header text-2xl md:text-3xl mb-2 mc-text-shadow leading-relaxed">
           How Sulfuria Unfolds
@@ -54,8 +54,8 @@ export function RoadmapSection() {
       </div>
 
       <p className="font-mc-body text-[11px] text-foreground/40 max-w-3xl mt-8 leading-relaxed">
-        Exact milestone dates confirm in Discord as Day 0 approaches — this
-        roadmap sets expectations, not a patch schedule.
+        Exact milestone dates confirm as Day 0 approaches — this roadmap sets
+        expectations, not a patch schedule.
       </p>
     </div>
   );
