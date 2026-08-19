@@ -34,7 +34,7 @@ export function AboutHeader() {
         transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
         className="font-mc-header text-3xl sm:text-4xl md:text-5xl mb-4 mc-text-shadow leading-relaxed"
       >
-        One World. One Life. <span className="text-accent">No Mercy.</span>
+        One World. Every Death Costs You. <span className="text-accent">No Mercy.</span>
       </motion.h1>
 
       <motion.p
@@ -43,9 +43,10 @@ export function AboutHeader() {
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
         className="font-mc-body text-sm sm:text-base text-neutral-300/90 max-w-2xl mb-6 leading-relaxed"
       >
-        Sulfuria is a 60-day hardcore factions gauntlet where survival is
-        earned, raids are deliberate, and every decision carries real weight.
-        Learn the world, build your position, and survive long enough to matter.
+        Sulfuria is a 60-day hardcore factions gauntlet running Hardcore Lite
+        (Life Drain): every death permanently drains a heart, and when your
+        hearts run out, you drop to spectator mode for good. Learn the world,
+        build your position, and survive long enough to matter.
       </motion.p>
 
       <motion.div

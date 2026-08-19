@@ -9,7 +9,7 @@ const features = [
     number: "01",
     title: "Hardcore Factions",
     description:
-      "Form alliances, build impenetrable fortresses, and survive the endless night. If you die, you are banned for the remainder of the 60 days. Trust no one outside your faction.",
+      "Form alliances, build impenetrable fortresses, and survive the endless night. Running Hardcore Lite (Life Drain), every death permanently drains a heart — run out, and you're watching from spectator mode for the rest of the 60 days. Trust no one outside your faction.",
   },
   {
     number: "02",
@@ -21,7 +21,7 @@ const features = [
     number: "03",
     title: "Fabric Enhanced",
     description:
-      "A carefully curated modpack featuring proximity voice chat, brutal zombie hordes, enhanced combat mechanics, and new scavengable loot. Progression is tough, engaging, and ruthless.",
+      "A carefully curated modpack featuring proximity voice chat, brutal zombie hordes, Hardcore Lite (Life Drain), and new scavengable loot. Progression is tough, engaging, and ruthless.",
   },
 ];
 

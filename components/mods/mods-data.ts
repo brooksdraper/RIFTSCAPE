@@ -29,6 +29,7 @@ export const MODPACKS: Modpack[] = [
     mods: [
       "Fabric API",
       "GlitchCore API",
+      "Better Combat — Combat Tweaks",
       "RIFTSCAPE Client — Server Resources",
       "Simple Voice Chat — Proximity Voice",
       "Tough As Nails — Temperature & Thirst",
@@ -50,6 +51,7 @@ export const MODPACKS: Modpack[] = [
     mods: [
       "Fabric API",
       "GlitchCore API",
+      "Better Combat — Combat Tweaks",
       "RIFTSCAPE Client — Server Resources",
       "Simple Voice Chat — Proximity Voice",
       "Tough As Nails — Temperature & Thirst",
