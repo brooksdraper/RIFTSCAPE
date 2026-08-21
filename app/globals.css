@@ -77,28 +77,52 @@ body {
 
 .pixel-corners {
   clip-path: polygon(
-    0 4px, 4px 4px, 4px 0,
-    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
-    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
-    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+    0 4px,
+    4px 4px,
+    4px 0,
+    calc(100% - 4px) 0,
+    calc(100% - 4px) 4px,
+    100% 4px,
+    100% calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 4px) 100%,
+    4px 100%,
+    4px calc(100% - 4px),
+    0 calc(100% - 4px)
   );
 }
 
 .pixel-corners-sm {
   clip-path: polygon(
-    0 2px, 2px 2px, 2px 0,
-    calc(100% - 2px) 0, calc(100% - 2px) 2px, 100% 2px,
-    100% calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) 100%,
-    2px 100%, 2px calc(100% - 2px), 0 calc(100% - 2px)
+    0 2px,
+    2px 2px,
+    2px 0,
+    calc(100% - 2px) 0,
+    calc(100% - 2px) 2px,
+    100% 2px,
+    100% calc(100% - 2px),
+    calc(100% - 2px) calc(100% - 2px),
+    calc(100% - 2px) 100%,
+    2px 100%,
+    2px calc(100% - 2px),
+    0 calc(100% - 2px)
   );
 }
 
 .pixel-corners-lg {
   clip-path: polygon(
-    0 8px, 8px 8px, 8px 0,
-    calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px,
-    100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%,
-    8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px)
+    0 8px,
+    8px 8px,
+    8px 0,
+    calc(100% - 8px) 0,
+    calc(100% - 8px) 8px,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    8px calc(100% - 8px),
+    0 calc(100% - 8px)
   );
 }
 
@@ -175,7 +199,8 @@ body {
 
 .mc-btn:disabled {
   background-color: #1c1c1f;
-  box-shadow: inset 2px 2px 0 0 rgba(255, 255, 255, 0.05),
+  box-shadow:
+    inset 2px 2px 0 0 rgba(255, 255, 255, 0.05),
     inset -2px -2px 0 0 rgba(0, 0, 0, 0.5);
   cursor: not-allowed;
 }
@@ -344,7 +369,11 @@ body {
     linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
     linear-gradient(rgba(0, 0, 0, 0.35) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 0, 0, 0.35) 1px, transparent 1px);
-  background-size: 32px 32px, 32px 32px, 8px 8px, 8px 8px;
+  background-size:
+    32px 32px,
+    32px 32px,
+    8px 8px,
+    8px 8px;
 }
 
 .deepslate-bg {
@@ -354,7 +383,11 @@ body {
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(rgba(0, 0, 0, 0.4) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 0, 0, 0.4) 1px, transparent 1px);
-  background-size: 48px 48px, 48px 48px, 12px 12px, 12px 12px;
+  background-size:
+    48px 48px,
+    48px 48px,
+    12px 12px,
+    12px 12px;
 }
 
 .dirt-bg {
@@ -362,7 +395,9 @@ body {
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 0, 0, 0.4) 1px, transparent 1px);
-  background-size: 16px 16px, 16px 16px;
+  background-size:
+    16px 16px,
+    16px 16px;
 }
 
 /* --- Enchantment glint ----------------------------------------------------

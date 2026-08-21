@@ -113,3 +113,16 @@ export function formatIssueDate(iso: string | undefined): string {
 
   return `${day} ${month} ${date.getUTCFullYear()}`;
 }
+
+/** "2026-08-09T12:34:56Z" -> "09 AUG 2026 12:34" (falls back to a dash). */
+export function formatIssueTimestamp(iso: string | undefined): string {
+  if (!iso) return "—";
+
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return "—";
+
+  const hours = String(date.getUTCHours()).padStart(2, "0");
+  const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+
+  return `${formatIssueDate(iso)} ${hours}:${minutes}`;
+}

@@ -20,6 +20,14 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "RIFTSCAPE | Sulfuria Hardcore ",
   description: "60 Days Zombie Apocalypse Factions Hardcore Challenge",
+  icons: {
+    icon: [
+      {
+        url: "/favicon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+  },
 };
 
 export default async function RootLayout({

@@ -56,6 +56,6 @@ export const config = {
      * Everything except static assets — those never carry a session and
      * refreshing on each one would burn requests against Supabase.
      */
-    "/((?!_next/static|_next/image|favicon.ico|font/|img/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+    "/((?!_next/static|_next/image|favicon.svg|font/|img/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
   ],
 };

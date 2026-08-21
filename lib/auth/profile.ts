@@ -25,6 +25,18 @@ export async function getCurrentProfile(): Promise<EnrolledPlayer | null> {
   return getProfileByUserId(user.id);
 }
 
+/**
+ * True if `raw_app_meta_data.role` on the auth user is `"admin"`.
+ *
+ * `app_metadata` (unlike `user_metadata`) can only be written through the
+ * Supabase Admin API / service role — a signed-in user can never set this on
+ * themselves via `supabase.auth.updateUser()` — so it's safe to trust as an
+ * access-control signal.
+ */
+export function isAdminUser(user: User): boolean {
+  return user.app_metadata?.role === "admin";
+}
+
 export type Viewer = {
   /** Signed in with Discord. */
   discord: DiscordIdentity | null;

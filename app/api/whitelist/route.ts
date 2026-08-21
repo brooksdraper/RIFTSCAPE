@@ -1,5 +1,9 @@
 import { getSupabaseServer } from "@/lib/supabase/server";
-import { getProfileByUserId } from "@/lib/players";
+import {
+  getProfileByUserId,
+  markAgreementAccepted,
+  markWhitelisted,
+} from "@/lib/players";
 
 /**
  * Whitelisting is Discord-gated the same way enrollment is, and additionally
@@ -38,6 +42,10 @@ export async function POST(request: Request) {
     );
   }
 
+  // Recorded before the lock check and the API push below, so an accepted
+  // agreement is never lost to a locked whitelist or a failed API call.
+  await markAgreementAccepted(user.id);
+
   // ========== WHITELIST LOCK CHECK ==========
 
   const whitelistUnlocked = ["1", "true", "yes", "on"].includes(
@@ -73,7 +81,9 @@ export async function POST(request: Request) {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ player: profile.mc_user }),
+      // mc_uuid, not mc_user — the username is a display snapshot from
+      // enrollment and can drift if the player renames on Mojang's side.
+      body: JSON.stringify({ player: profile.mc_uuid }),
       signal: AbortSignal.timeout(5000),
     });
 
@@ -99,6 +109,8 @@ export async function POST(request: Request) {
       { status: 502 },
     );
   }
+
+  await markWhitelisted(user.id);
 
   return Response.json({ success: true }, { status: 200 });
 }

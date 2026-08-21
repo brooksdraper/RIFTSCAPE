@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { BackgroundOverlay } from "@/components/layout/BackgroundOverlay";
 import { NoCredentialsNotice } from "@/components/user/NoCredentialsNotice";
-import { SignInGate } from "@/components/agreement/SignInGate";
+import { SignInGate } from "@/components/auth/SignInGate";
 import { AgreementForm } from "@/components/agreement/AgreementForm";
 import { getCurrentUser } from "@/lib/auth/profile";
 import { getProfileByUserId } from "@/lib/players";
@@ -37,7 +37,7 @@ export default async function AgreementPage() {
         </div>
 
         {!user ? (
-          <SignInGate />
+          <SignInGate description="Sign in with Discord to review and accept the server agreement." />
         ) : !profile ? (
           <NoCredentialsNotice />
         ) : (

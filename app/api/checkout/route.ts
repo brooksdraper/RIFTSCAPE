@@ -77,7 +77,9 @@ export async function POST(request: Request) {
     );
   }
 
-  const origin = new URL(request.url).origin;
+  // Prefer the canonical site URL over the request's own origin, which can
+  // resolve to an internal/proxy hostname behind Vercel's edge network.
+  const origin = process.env.NEXT_PUBLIC_SITE_URL ?? new URL(request.url).origin;
 
   const session = await getStripe().checkout.sessions.create({
     mode: "payment",

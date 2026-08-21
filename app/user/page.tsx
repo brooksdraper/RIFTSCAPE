@@ -56,7 +56,7 @@ export default async function UserPage({
       <BackgroundOverlay opacityClass="opacity-20" />
 
       <div className="relative z-10 container mx-auto px-6 pt-12">
-        <IdHeader hasAccount={!!profile} />
+        <IdHeader profile={profile} />
 
         {mc_verify && <McVerifyBanner result={mc_verify} />}
 

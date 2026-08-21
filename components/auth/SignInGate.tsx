@@ -4,7 +4,15 @@ import { motion } from "motion/react";
 import { Lock } from "lucide-react";
 import { signInWithDiscord } from "@/lib/auth/sign-in";
 
-export function SignInGate() {
+interface SignInGateProps {
+  title?: string;
+  description?: string;
+}
+
+export function SignInGate({
+  title = "Sign In Required",
+  description = "Sign in with Discord to continue.",
+}: SignInGateProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -27,7 +35,7 @@ export function SignInGate() {
         transition={{ duration: 0.4, delay: 0.25, ease: "easeOut" }}
         className="font-mc-header text-xl sm:text-2xl text-foreground mb-3 mc-text-shadow leading-relaxed"
       >
-        Sign In Required
+        {title}
       </motion.h2>
       <motion.p
         initial={{ opacity: 0, y: 8 }}
@@ -35,7 +43,7 @@ export function SignInGate() {
         transition={{ duration: 0.4, delay: 0.32, ease: "easeOut" }}
         className="font-mc-body text-foreground/60 mb-8 leading-relaxed text-sm"
       >
-        Sign in with Discord to review and accept the server agreement.
+        {description}
       </motion.p>
 
       <motion.button
