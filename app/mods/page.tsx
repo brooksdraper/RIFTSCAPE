@@ -67,7 +67,7 @@ export default function ModsPage() {
               </h3>
             </div>
             <a
-              href="/file/riftscape/riftscape-1.0.1.jar"
+              href="/file/riftscape/riftscape-1.1.0.jar"
               download
               className="mc-btn mc-btn-accent pixel-corners px-6 py-4 font-mc-sub text-[10px] uppercase tracking-widest inline-flex items-center justify-center"
             >
