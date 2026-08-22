@@ -346,6 +346,69 @@ body {
   animation: redstone-pulse 3.4s ease-in-out infinite;
 }
 
+/* --- Portal FX --------------------------------------------------------
+   Ambient motion for the nether-portal icon (components/discord/PortalIcon).
+   Vanilla's portal texture cycles through frames rather than fading, so the
+   flicker steps opacity instead of easing it — a sprite swap, not a glow.
+   No box-shadow is involved, so this doesn't compete with the sanctioned
+   halos above.                                                             */
+@keyframes portal-flicker {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  50%,
+  90% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.portal-cell {
+  animation: portal-flicker 1.2s steps(1, end) infinite;
+}
+
+/* Motes drifting up out of the portal and burning out. Rise distance is a
+   token (`--portal-particle-rise`) so callers with more headroom — the
+   progress bar, which isn't boxed into a small icon slot — can have their
+   embers float much higher without a second keyframe. */
+@keyframes portal-particle-rise {
+  0% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, calc(-1 * var(--portal-particle-rise, 18px)))
+      scale(0.4);
+    opacity: 0;
+  }
+}
+
+.portal-particle {
+  position: absolute;
+  left: 50%;
+  bottom: 40%;
+  width: 2px;
+  height: 2px;
+  background-color: var(--mc-epic);
+  animation: portal-particle-rise 1.6s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-cell {
+    animation: none;
+  }
+
+  .portal-particle {
+    display: none;
+  }
+}
+
 /* --- Inputs ---------------------------------------------------------------
    Text fields are recessed black slots with a gold focus ring.               */
 
