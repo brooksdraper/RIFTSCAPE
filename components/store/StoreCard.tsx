@@ -2,13 +2,21 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import type { StoreItem, StoreTheme } from "@/lib/store/store-items";
+import {
+  getStoreItemById,
+  getUpgradePriceCents,
+  formatPriceCents,
+  type StoreItem,
+  type StoreTheme,
+} from "@/lib/store/store-items";
+import type { EnrolledPlayer } from "@/lib/players";
 
 interface StoreCardProps {
   item: StoreItem;
   index: number;
   isLoggedIn: boolean;
   lifeNumber: number | null;
+  currentTier: EnrolledPlayer["tier"] | null;
   onPurchase: (item: StoreItem) => void;
 }
 
@@ -27,6 +35,20 @@ const themeStyles: Record<
     glint: string;
   }
 > = {
+  blue: {
+    text: "#55AAFF",
+    border: "#2a5a8a",
+    button: "mc-btn",
+    buttonGlow: "",
+    glint: "enchant-glint",
+  },
+  green: {
+    text: "#55FF55",
+    border: "#2a8a2a",
+    button: "mc-btn",
+    buttonGlow: "",
+    glint: "enchant-glint",
+  },
   yellow: {
     text: "var(--mc-rare)",
     border: "#8a8a2a",
@@ -55,24 +77,29 @@ export function StoreCard({
   index,
   isLoggedIn,
   lifeNumber,
+  currentTier,
   onPurchase,
 }: StoreCardProps) {
   const theme = themeStyles[item.theme];
 
+  const upgradePriceCents = getUpgradePriceCents(item, currentTier);
+  const isUpgrade = isLoggedIn && upgradePriceCents < item.priceCents;
+
   const livesLeft =
     item.maxLifeNumber !== undefined
-      ? Math.max(item.maxLifeNumber - (lifeNumber ?? 1), 0)
+      ? Math.max(item.maxLifeNumber - (lifeNumber ?? 0), 0)
       : null;
 
   let badgeText = "Most Popular";
-  if (item.id === "sponsor") {
-    // We calculate the relative value dynamically based on the extra-life bonus
-    // Assuming the base value of Sponsor is its price, and Extra Life is an added bonus.
-    const sponsorPrice = item.priceCents;
-    const extraLifePrice = 1299; // 12.99 from extra-life item
-    const totalValue = sponsorPrice + extraLifePrice;
-    const valuePercent = Math.round((totalValue / sponsorPrice) * 100);
-    badgeText = `${valuePercent}% VALUE`;
+  if (item.bonus) {
+    // Relative value dynamically based on the bundled bonus item's own price
+    // — whatever item carries a `bonus` gets this badge, not a hardcoded id.
+    const bonusItem = getStoreItemById("extra-life");
+    if (bonusItem) {
+      const totalValue = item.priceCents + bonusItem.priceCents;
+      const valuePercent = Math.round((totalValue / item.priceCents) * 100);
+      badgeText = `${valuePercent}% VALUE`;
+    }
   }
 
   return (
@@ -114,12 +141,31 @@ export function StoreCard({
         </h2>
       </div>
 
-      <div
-        className="font-mc-header text-2xl mb-5 mc-text-shadow"
-        style={{ color: theme.text }}
-      >
-        {item.price}
-      </div>
+      {isUpgrade ? (
+        <div className="mb-5">
+          <div className="font-mc-sub text-[9px] text-foreground/40 tracking-widest uppercase mb-1">
+            Your Upgrade Price
+          </div>
+          <div className="flex items-baseline gap-2">
+            <span
+              className="font-mc-header text-2xl mc-text-shadow"
+              style={{ color: theme.text }}
+            >
+              {formatPriceCents(upgradePriceCents)}
+            </span>
+            <span className="font-mc-body text-xs text-foreground/40 line-through">
+              {item.price}
+            </span>
+          </div>
+        </div>
+      ) : (
+        <div
+          className="font-mc-header text-2xl mb-5 mc-text-shadow"
+          style={{ color: theme.text }}
+        >
+          {item.price}
+        </div>
+      )}
 
       {livesLeft !== null && isLoggedIn && (
         <div
@@ -179,6 +225,11 @@ export function StoreCard({
             onClick={() => isLoggedIn && onPurchase(item)}
             disabled={!isLoggedIn}
             title={isLoggedIn ? undefined : "Sign in to purchase"}
+            style={
+              isLoggedIn && theme.button !== "mc-btn-epic"
+                ? { backgroundColor: theme.border }
+                : undefined
+            }
             className={`mc-btn pixel-corners w-full py-4 font-mc-sub text-xs uppercase tracking-widest ${
               isLoggedIn ? theme.button : "text-foreground/40"
             }`}

@@ -10,6 +10,7 @@ import {
   countUnlocked,
   meetsSurvivorGate,
   supporterItems,
+  type SupporterTier,
   type SupporterViewer,
 } from "@/lib/store/supporter-items";
 
@@ -17,6 +18,16 @@ interface SupporterTierStatusProps {
   minecraftUsername: string | null;
   viewer: SupporterViewer;
 }
+
+/** The next tag up the ladder from each tier — `null` once there's nothing left to buy. */
+const NEXT_PAID_TIER: Record<SupporterTier, SupporterTier | null> = {
+  member: "voyager",
+  survivor: "voyager",
+  voyager: "weaver",
+  weaver: "sentinel",
+  sentinel: "archon",
+  archon: null,
+};
 
 /**
  * The player's standing in the vault: which tag they hold, how far along the
@@ -36,13 +47,15 @@ export function SupporterTierStatus({
     (viewer.tier !== null && viewer.tier !== "member") ||
     meetsSurvivorGate(viewer.playtimeHours);
 
+  const nextTier = viewer.tier ? NEXT_PAID_TIER[viewer.tier] : "voyager";
   const cta = !viewer.tier
     ? { href: "/", label: "Sign In at HQ →" }
-    : viewer.tier === "sponsor"
+    : nextTier === null
       ? null
-      : viewer.tier === "supporter"
-        ? { href: "/store", label: "Upgrade to Sponsor →" }
-        : { href: "/store", label: "Get a Supporter Tag →" };
+      : {
+          href: "/store",
+          label: `Upgrade to ${TIER_META[nextTier].label} →`,
+        };
 
   return (
     <motion.div

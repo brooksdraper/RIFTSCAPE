@@ -23,7 +23,7 @@ export const ROADMAP_PHASES: RoadmapPhase[] = [
   {
     day: "Day 25–42",
     title: "The Long Night",
-    copy: "Mod-driven threats intensify, resources thin out, and extra lives start actually mattering.",
+    copy: "Mod-driven threats intensify, resources thin out, and that extra life starts actually mattering.",
   },
   {
     day: "Day 43–59",

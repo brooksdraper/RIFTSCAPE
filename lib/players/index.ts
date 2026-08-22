@@ -16,7 +16,7 @@ export type EnrolledPlayer = {
   /** Set once the RIFTSCAPE API confirmed this profile was added to the server whitelist. */
   whitelisted_at?: string | null;
   /** Lifetime — a Store purchase, so it survives past the season it was bought in. */
-  tier: "member" | "survivor" | "supporter" | "sponsor";
+  tier: "member" | "survivor" | "voyager" | "weaver" | "sentinel" | "archon";
   /** Season-scoped — from this profile's season_enrollments row for the active season. */
   life_number: number;
   /** RED-strike count under the 3-strike moderation system. Admin-only, season-scoped. */
@@ -33,8 +33,10 @@ export type EnrolledPlayer = {
 export const TIER_RANK: Record<EnrolledPlayer["tier"], number> = {
   member: 0,
   survivor: 1,
-  supporter: 2,
-  sponsor: 3,
+  voyager: 2,
+  weaver: 3,
+  sentinel: 4,
+  archon: 5,
 };
 
 /**

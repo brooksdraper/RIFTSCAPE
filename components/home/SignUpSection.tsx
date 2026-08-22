@@ -108,9 +108,11 @@ export function SignUpSection({ viewer }: { viewer: Viewer }) {
         it count.
       </p>
       <p className="font-mc-body text-[11px] text-foreground/40 mb-10 leading-relaxed">
-        *Up to two additional lives may be purchased via the Store. Accounts
-        submitted here are held for the duration of the 60-Day challenge and
-        completely wiped once it concludes. One survivor per Discord account.
+        *Running Hardcore Lite (Life Drain): every death permanently drains a
+        heart, and one additional life may be purchased via the Store once
+        hearts run out. Accounts submitted here are held for the duration of
+        the 60-Day challenge and completely wiped once it concludes. One
+        survivor per Discord account.
       </p>
 
       {isEnrolled ? (

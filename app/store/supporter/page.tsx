@@ -50,8 +50,9 @@ export default async function SupporterStore() {
                 Tags are sold at the Supply Drop
               </h2>
               <p className="font-mc-body text-xs text-neutral-300/90 leading-relaxed">
-                Supporter and Sponsor tags apply to your account within a minute
-                of checkout and cover every entry at or below their tier.
+                Voyager, Weaver, Sentinel, and Archon tags apply to your account
+                within a minute of checkout and cover every entry at or below
+                their tier.
               </p>
             </div>
             <Link

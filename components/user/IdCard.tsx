@@ -15,15 +15,19 @@ import { SecuritySeal } from "./SecuritySeal";
 const TIER_LABEL: Record<EnrolledPlayer["tier"], string> = {
   member: "Member",
   survivor: "Survivor",
-  supporter: "Supporter",
-  sponsor: "Sponsor",
+  voyager: "Voyager",
+  weaver: "Weaver",
+  sentinel: "Sentinel",
+  archon: "Archon",
 };
 
 const TIER_BADGE: Record<EnrolledPlayer["tier"], string | null> = {
   member: null,
   survivor: null,
-  supporter: "/img/supporter_tag.png",
-  sponsor: "/img/sponsor_tag.png",
+  voyager: "/img/tag_voyager.png",
+  weaver: "/img/tag_weaver.png",
+  sentinel: "/img/tag_sentinel.png",
+  archon: "/img/tag_archon.png",
 };
 
 /** Mirrors the wiki/store rarity ramp: tier name color + muted card border. */
@@ -33,8 +37,10 @@ const TIER_STYLE: Record<
 > = {
   member: { text: "var(--mc-common)", border: "#3f3f3f" },
   survivor: { text: "var(--mc-info)", border: "#2a6a6a" },
-  supporter: { text: "var(--mc-rare)", border: "#8a8a2a" },
-  sponsor: { text: "var(--mc-danger)", border: "#8a2a2a" },
+  voyager: { text: "#55AAFF", border: "#2a5a8a" },
+  weaver: { text: "#55FF55", border: "#2a8a2a" },
+  sentinel: { text: "var(--mc-rare)", border: "#8a8a2a" },
+  archon: { text: "var(--mc-danger)", border: "#8a2a2a" },
 };
 
 /** Small labelled data cell, laid out like an inventory tooltip field. */
@@ -199,7 +205,7 @@ export function IdCard({ profile }: { profile: EnrolledPlayer }) {
                       height={64}
                       className="w-3 h-3 pixelated"
                     />
-                    {String(profile.life_number).padStart(2, "0")} / 03
+                    {String(profile.life_number).padStart(2, "0")} / 01
                   </span>
                 </div>
 

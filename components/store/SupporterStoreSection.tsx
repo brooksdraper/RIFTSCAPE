@@ -46,13 +46,13 @@ export function SupporterStoreSection() {
       <div className="relative z-10 px-6 py-16 md:py-20">
         <div className="text-center mb-12">
           <span className="inline-block mc-panel-raised pixel-corners pixel-slot font-mc-sub text-accent text-[11px] sm:text-xs tracking-widest uppercase px-6 py-2 mb-6 mc-text-shadow">
-            Supporter Perks
+            Rank Perks
           </span>
           <h2 className="font-mc-header text-2xl md:text-3xl text-white mb-4 mc-text-shadow leading-relaxed">
-            Supporter&apos;s <span className="text-accent">Store</span>
+            Cosmetic <span className="text-accent">Vault</span>
           </h2>
           <p className="font-mc-body text-sm sm:text-base text-neutral-300/90 max-w-2xl mx-auto leading-relaxed">
-            Cosmetic extras included with your Supporter and Sponsor tags.
+            Cosmetic extras included with every rank tag.
           </p>
           <Link
             href="/store/supporter"

@@ -47,8 +47,10 @@ export interface SupporterCategory {
 export const SUPPORTER_TIER_ORDER: Record<SupporterTier, number> = {
   member: 0,
   survivor: 1,
-  supporter: 2,
-  sponsor: 3,
+  voyager: 2,
+  weaver: 3,
+  sentinel: 4,
+  archon: 5,
 };
 
 export const TIER_META: Record<
@@ -76,19 +78,33 @@ export const TIER_META: Record<
     badge: "Survivor",
     gate: `${SURVIVOR_HOURS_REQUIRED}h Online`,
   },
-  supporter: {
-    label: "Supporter",
+  voyager: {
+    label: "Voyager",
+    text: "#55AAFF",
+    border: "#2a5a8a",
+    badge: "Voyager",
+    gate: "Voyager Tag",
+  },
+  weaver: {
+    label: "Weaver",
+    text: "#55FF55",
+    border: "#2a8a2a",
+    badge: "Weaver",
+    gate: "Weaver Tag",
+  },
+  sentinel: {
+    label: "Sentinel",
     text: "var(--mc-rare)",
     border: "#8a8a2a",
-    badge: "Supporter",
-    gate: "Supporter Tag",
+    badge: "Sentinel",
+    gate: "Sentinel Tag",
   },
-  sponsor: {
-    label: "Sponsor",
+  archon: {
+    label: "Archon",
     text: "var(--mc-danger)",
     border: "#8a2a2a",
-    badge: "Sponsor",
-    gate: "Sponsor Tag",
+    badge: "Archon",
+    gate: "Archon Tag",
   },
 };
 
@@ -125,18 +141,38 @@ export const supporterCategories: SupporterCategory[] = [
         kind: "Chat Icon",
         description:
           "Wear your remaining lives on your sleeve. Turns gray on your last one.",
-        tier: "supporter",
+        tier: "voyager",
         glyph: "❤",
         command: "/icon heart",
+      },
+      {
+        id: "icon-voyager-shield",
+        name: "Voyager Shield",
+        kind: "Tag Icon",
+        description:
+          "The blue shield tag granted by the Voyager Tag. Applied automatically on purchase.",
+        tier: "voyager",
+        image: "/img/tag_voyager.png",
+        command: "/icon voyager",
       },
       {
         id: "icon-star",
         name: "Star",
         kind: "Chat Icon",
         description: "A clean four-point star. Quiet flex, no animation.",
-        tier: "supporter",
+        tier: "weaver",
         glyph: "✦",
         command: "/icon star",
+      },
+      {
+        id: "icon-weaver-shield",
+        name: "Weaver Shield",
+        kind: "Tag Icon",
+        description:
+          "The green shield tag granted by the Weaver Tag. Outranks and replaces the blue shield.",
+        tier: "weaver",
+        image: "/img/tag_weaver.png",
+        command: "/icon weaver",
       },
       {
         id: "icon-skull",
@@ -144,49 +180,49 @@ export const supporterCategories: SupporterCategory[] = [
         kind: "Chat Icon",
         description:
           "Marks you as a veteran of the outbreak. Pairs with the infection wiki set.",
-        tier: "supporter",
+        tier: "sentinel",
         glyph: "☠",
         command: "/icon skull",
-      },
-      {
-        id: "icon-supporter-shield",
-        name: "Supporter Shield",
-        kind: "Tag Icon",
-        description:
-          "The yellow shield tag granted by the Supporter Tag. Applied automatically on purchase.",
-        tier: "supporter",
-        image: "/img/supporter_tag.png",
-        command: "/icon supporter",
-      },
-      {
-        id: "icon-sponsor-shield",
-        name: "Sponsor Shield",
-        kind: "Tag Icon",
-        description:
-          "The red shield tag granted by the Sponsor Tag. Outranks and replaces the yellow shield.",
-        tier: "sponsor",
-        image: "/img/sponsor_tag.png",
-        command: "/icon sponsor",
       },
       {
         id: "icon-crown",
         name: "Crown",
         kind: "Chat Icon",
         description:
-          "Sponsor-exclusive. Renders in gold regardless of the chat color you equip.",
-        tier: "sponsor",
+          "Sentinel-exclusive. Renders in gold regardless of the chat color you equip.",
+        tier: "sentinel",
         glyph: "♛",
         command: "/icon crown",
+      },
+      {
+        id: "icon-sentinel-shield",
+        name: "Sentinel Shield",
+        kind: "Tag Icon",
+        description:
+          "The yellow shield tag granted by the Sentinel Tag. Outranks and replaces the green shield.",
+        tier: "sentinel",
+        image: "/img/tag_sentinel.png",
+        command: "/icon sentinel",
       },
       {
         id: "icon-flame",
         name: "Sulfur Flame",
         kind: "Chat Icon",
         description:
-          "Sponsor-exclusive. The only icon with a two-frame flicker in chat.",
-        tier: "sponsor",
+          "Archon-exclusive. The only icon with a two-frame flicker in chat.",
+        tier: "archon",
         glyph: "✹",
         command: "/icon flame",
+      },
+      {
+        id: "icon-archon-shield",
+        name: "Archon Shield",
+        kind: "Tag Icon",
+        description:
+          "The red shield tag granted by the Archon Tag. Outranks and replaces the yellow shield.",
+        tier: "archon",
+        image: "/img/tag_archon.png",
+        command: "/icon archon",
       },
     ],
   },
@@ -216,21 +252,12 @@ export const supporterCategories: SupporterCategory[] = [
         command: "/chatcolor white",
       },
       {
-        id: "color-yellow",
-        name: "Yellow",
-        kind: "Chat Color",
-        description:
-          "Matches the Supporter shield. The tier's signature color in chat.",
-        tier: "supporter",
-        swatch: "#ffff55",
-        command: "/chatcolor yellow",
-      },
-      {
         id: "color-aqua",
         name: "Aqua",
         kind: "Chat Color",
-        description: "Cold blue, readable underwater and in the swamp fog.",
-        tier: "supporter",
+        description:
+          "Cold blue, matching the Voyager shield. Readable underwater and in the swamp fog.",
+        tier: "voyager",
         swatch: "#55ffff",
         command: "/chatcolor aqua",
       },
@@ -239,7 +266,7 @@ export const supporterCategories: SupporterCategory[] = [
         name: "Light Purple",
         kind: "Chat Color",
         description: "Amethyst tone borrowed from the Extra Life item.",
-        tier: "supporter",
+        tier: "weaver",
         swatch: "#e070ff",
         command: "/chatcolor lightpurple",
       },
@@ -249,17 +276,27 @@ export const supporterCategories: SupporterCategory[] = [
         kind: "Chat Color",
         description:
           "The vanilla XP gold. Reads as staff-adjacent — use sparingly.",
-        tier: "supporter",
+        tier: "weaver",
         swatch: "#ffaa00",
         command: "/chatcolor gold",
+      },
+      {
+        id: "color-yellow",
+        name: "Yellow",
+        kind: "Chat Color",
+        description:
+          "Matches the Sentinel shield. The tier's signature color in chat.",
+        tier: "sentinel",
+        swatch: "#ffff55",
+        command: "/chatcolor yellow",
       },
       {
         id: "color-red",
         name: "Redstone",
         kind: "Chat Color",
         description:
-          "Sponsor-exclusive. Shares the alert red, so it cuts through a busy chat.",
-        tier: "sponsor",
+          "Archon-exclusive. Shares the alert red, so it cuts through a busy chat.",
+        tier: "archon",
         swatch: "#ff5555",
         command: "/chatcolor red",
       },
@@ -268,8 +305,8 @@ export const supporterCategories: SupporterCategory[] = [
         name: "Rift Gradient",
         kind: "Animated Chat Color",
         description:
-          "Sponsor-exclusive. Your message fades across the rarity ramp, one character at a time.",
-        tier: "sponsor",
+          "Archon-exclusive. Your message fades across the rarity ramp, one character at a time.",
+        tier: "archon",
         swatch:
           "linear-gradient(135deg, #ff5555 0%, #ffaa00 40%, #ffff55 70%, #e070ff 100%)",
         command: "/chatcolor gradient",
@@ -298,7 +335,7 @@ export const supporterCategories: SupporterCategory[] = [
         name: "Sit",
         kind: "Emote",
         description: "Sit on any block, stair, or slab you're standing on.",
-        tier: "supporter",
+        tier: "voyager",
         glyph: "🪑",
         command: "/sit",
       },
@@ -307,7 +344,7 @@ export const supporterCategories: SupporterCategory[] = [
         name: "Lay",
         kind: "Emote",
         description: "Lie down without a bed. Does not skip the night.",
-        tier: "supporter",
+        tier: "weaver",
         glyph: "🛏",
         command: "/lay",
       },
@@ -316,7 +353,7 @@ export const supporterCategories: SupporterCategory[] = [
         name: "Spin",
         kind: "Emote",
         description: "Rotate in place. Cancels the moment you move.",
-        tier: "supporter",
+        tier: "weaver",
         glyph: "🌀",
         command: "/spin",
       },
@@ -326,7 +363,7 @@ export const supporterCategories: SupporterCategory[] = [
         kind: "Emote",
         description:
           "Wear your held item on your head. Purely visual — no armor value.",
-        tier: "supporter",
+        tier: "sentinel",
         glyph: "🎩",
         command: "/hat",
       },
@@ -335,8 +372,8 @@ export const supporterCategories: SupporterCategory[] = [
         name: "Nickname",
         kind: "Command",
         description:
-          "Sponsor-exclusive. Set a colored display name. Your real username stays visible on the tab list.",
-        tier: "sponsor",
+          "Archon-exclusive. Set a colored display name. Your real username stays visible on the tab list.",
+        tier: "archon",
         glyph: "✎",
         command: "/nick <name>",
       },
@@ -345,8 +382,8 @@ export const supporterCategories: SupporterCategory[] = [
         name: "Firework",
         kind: "Command",
         description:
-          "Sponsor-exclusive. Launch a cosmetic firework. Deals no damage, on a 60s cooldown.",
-        tier: "sponsor",
+          "Archon-exclusive. Launch a cosmetic firework. Deals no damage, on a 60s cooldown.",
+        tier: "archon",
         glyph: "✷",
         command: "/firework",
       },
@@ -363,26 +400,42 @@ export const supporterCategories: SupporterCategory[] = [
         name: "Discord Role",
         kind: "Rank Perk",
         description:
-          "A colored role in the Sulfuria Discord plus access to the supporter channels.",
-        tier: "supporter",
+          "A colored role in the Sulfuria Discord plus access to the rank-holder channels.",
+        tier: "voyager",
         glyph: "◈",
+      },
+      {
+        id: "perk-bronze-queue",
+        name: "Bronze Class Queueing",
+        kind: "Rank Perk",
+        description:
+          "Skip ahead of members in the join queue when the server hits capacity.",
+        tier: "voyager",
+        glyph: "❖",
       },
       {
         id: "perk-silver-queue",
         name: "Silver Class Queueing",
         kind: "Rank Perk",
-        description:
-          "Skip ahead of members in the join queue when the server hits capacity.",
-        tier: "supporter",
+        description: "Ahead of bronze class and everyone below it.",
+        tier: "weaver",
         glyph: "❖",
       },
       {
         id: "perk-gold-queue",
         name: "Gold Class Queueing",
         kind: "Rank Perk",
+        description: "Ahead of silver class and everyone below it.",
+        tier: "sentinel",
+        glyph: "❖",
+      },
+      {
+        id: "perk-diamond-queue",
+        name: "Diamond Class Queueing",
+        kind: "Rank Perk",
         description:
-          "Top of the join queue — ahead of silver class and everyone below it.",
-        tier: "sponsor",
+          "Top of the join queue — ahead of gold class and everyone below it.",
+        tier: "archon",
         glyph: "❖",
       },
       {
@@ -390,8 +443,8 @@ export const supporterCategories: SupporterCategory[] = [
         name: "Bold Name Format",
         kind: "Rank Perk",
         description:
-          "Sponsor-exclusive. Your username renders bold in chat, on signs, and in death messages.",
-        tier: "sponsor",
+          "Archon-exclusive. Your username renders bold in chat, on signs, and in death messages.",
+        tier: "archon",
         glyph: "B",
       },
       {
@@ -399,8 +452,8 @@ export const supporterCategories: SupporterCategory[] = [
         name: "Bundled Extra Life",
         kind: "Consumable",
         description:
-          "The Sponsor Tag ships with one Extra Life. Counts toward the two-per-season cap.",
-        tier: "sponsor",
+          "The Archon Tag ships with one Extra Life. Counts toward the one-per-season cap.",
+        tier: "archon",
         image: "/img/extra_life.png",
       },
     ],

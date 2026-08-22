@@ -1,5 +1,5 @@
 import { getStripe } from "@/lib/store/stripe";
-import { getStoreItemById } from "@/lib/store/store-items";
+import { getStoreItemById, getUpgradePriceCents } from "@/lib/store/store-items";
 import { getProfileByMinecraftUsername, TIER_RANK } from "@/lib/players";
 import { getCurrentProfile } from "@/lib/auth/profile";
 import { MINECRAFT_USERNAME_PATTERN } from "@/lib/validation";
@@ -81,15 +81,24 @@ export async function POST(request: Request) {
   // resolve to an internal/proxy hostname behind Vercel's edge network.
   const origin = process.env.NEXT_PUBLIC_SITE_URL ?? new URL(request.url).origin;
 
+  // A gift grants the recipient's own account that rank from scratch, so it's
+  // never an "upgrade" off the buyer's own tier — only a self-purchase prices
+  // against what the buyer already holds. Computed server-side off the
+  // session's own buyer record; the client never supplies a price.
+  const unitAmount = isGift
+    ? item.priceCents
+    : getUpgradePriceCents(item, buyer.tier);
+
   const session = await getStripe().checkout.sessions.create({
     mode: "payment",
     line_items: [
       {
         price_data: {
           currency: "usd",
-          unit_amount: item.priceCents,
+          unit_amount: unitAmount,
           product_data: {
-            name: item.name,
+            name:
+              unitAmount < item.priceCents ? `${item.name} (Upgrade)` : item.name,
             description: `For ${recipient.mc_user}`,
             tax_code: "txcd_10201000",
           },
@@ -101,6 +110,7 @@ export async function POST(request: Request) {
       itemId: item.id,
       buyerMinecraftUsername: buyer.mc_user,
       recipientMinecraftUsername: recipient.mc_user,
+      buyerTierAtPurchase: buyer.tier,
     },
     success_url: `${origin}/store?purchase=success`,
     cancel_url: `${origin}/store?purchase=canceled`,

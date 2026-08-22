@@ -12,22 +12,28 @@ import { AccountPillShell } from "./AccountPillShell";
 const TIER_LABEL: Record<EnrolledPlayer["tier"], string> = {
   member: "Member",
   survivor: "Survivor",
-  supporter: "Supporter",
-  sponsor: "Sponsor",
+  voyager: "Voyager",
+  weaver: "Weaver",
+  sentinel: "Sentinel",
+  archon: "Archon",
 };
 
 const TIER_BADGE: Record<EnrolledPlayer["tier"], string | null> = {
   member: null,
-  survivor: null,
-  supporter: "/img/supporter_tag.png",
-  sponsor: "/img/sponsor_tag.png",
+  survivor: "/img/tag_survivor.png",
+  voyager: "/img/tag_voyager.png",
+  weaver: "/img/tag_weaver.png",
+  sentinel: "/img/tag_sentinel.png",
+  archon: "/img/tag_archon.png",
 };
 
 const TIER_PILL_CLASS: Record<EnrolledPlayer["tier"], string> = {
   member: "text-foreground/70",
   survivor: "text-[color:var(--mc-common)]",
-  supporter: "text-[color:var(--mc-rare)]",
-  sponsor: "text-[color:var(--mc-danger)]",
+  voyager: "text-[#55AAFF]",
+  weaver: "text-[#55FF55]",
+  sentinel: "text-[color:var(--mc-rare)]",
+  archon: "text-[color:var(--mc-danger)]",
 };
 
 export function ProfileBanner({ profile }: { profile: EnrolledPlayer }) {
@@ -71,16 +77,6 @@ export function ProfileBanner({ profile }: { profile: EnrolledPlayer }) {
             />
           )}
           {TIER_LABEL[profile.tier]}
-        </span>
-        <span className="flex items-center gap-1 text-[color:#f1432e]/80">
-          <Image
-            src="/img/hardcore-64x64.png"
-            alt="Life"
-            width={64}
-            height={64}
-            className="w-4 h-4 pixelated"
-          />
-          {profile.life_number}
         </span>
         <motion.button
           type="button"

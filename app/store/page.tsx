@@ -39,8 +39,9 @@ export default async function Store({
           isLoggedIn={profile !== null}
           minecraftUsername={profile?.mc_user ?? null}
           lifeNumber={profile?.life_number ?? null}
+          currentTier={profile?.tier ?? null}
         />
-        <SupporterStoreSection />
+        {/* <SupporterStoreSection /> */}
       </div>
     </main>
   );

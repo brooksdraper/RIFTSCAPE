@@ -120,7 +120,7 @@ const survivalRules: Rule[] = [
     factionImpact: "Minor; counts as RED strike if repeated",
   },
   {
-    id: "survival-4",
+    id: "survival-2",
     title: "Duping & Item Exploits",
     strikeType: "BLACK",
     summary: "No duplicating items through glitches or exploits",
@@ -130,7 +130,7 @@ const survivalRules: Rule[] = [
       "Faction receives BLACK strike; may be disbanded if complicit or repeated",
   },
   {
-    id: "survival-5",
+    id: "survival-3",
     title: "Mob Farm Lag Abuse",
     strikeType: "RED",
     summary:
@@ -146,7 +146,7 @@ const survivalRules: Rule[] = [
     factionImpact: "Faction RED strike",
   },
   {
-    id: "survival-7",
+    id: "survival-4",
     title: "PVP",
     strikeType: "RED",
     summary:
@@ -160,43 +160,12 @@ const survivalRules: Rule[] = [
     tempBan: "+ 4-12 pts.",
     factionImpact: "Faction RED strike",
   },
-  {
-    id: "survival-8",
-    title: "Stealing from Unlocked Containers",
-    strikeType: "RED",
-    summary:
-      'Do not take items from chests/barrels you don\'t have permission to access. *VOID when "In Combat"',
-    violations: [
-      "Opening unlocked chest in claimed area and taking supplies",
-      "Stealing from communal faction chest",
-      "Taking drops from another faction's farm",
-      "Opening barrels in shared space without asking",
-    ],
-    consequence: "RED strike + forced restoration / material compensation",
-    tempBan: "+ 3-7 pts.",
-    factionImpact: "Minor; counts as RED strike if repeated",
-  },
 ];
 
 // FACTION WARS & PVP
 const factionRules: Rule[] = [
   {
     id: "faction-1",
-    title: "Raid Accountability",
-    strikeType: "RED",
-    summary:
-      "All raids must claim responsibility and identify participating members. Raiding is allowed and encouraged — this is a core competitive system.",
-    violations: [
-      "Raiding anonymously or refusing to identify members involved",
-      "Denying involvement in a raid when evidence is clear",
-      "Attacking/raiding and ghosting without engagement",
-    ],
-    consequence: "RED strike",
-    tempBan: "+ 4-12 pts.",
-    factionImpact: "Faction RED strike",
-  },
-  {
-    id: "faction-2",
     title: "Sportsmanship & Good Faith",
     strikeType: "RED",
     summary:
@@ -213,7 +182,7 @@ const factionRules: Rule[] = [
     factionImpact: "Faction RED strike; reputational damage",
   },
   {
-    id: "faction-3",
+    id: "faction-2",
     title: "Safe Zone Protection",
     strikeType: "BLACK",
     summary: "No PvP or raiding in designated safe zones (Spawn)",

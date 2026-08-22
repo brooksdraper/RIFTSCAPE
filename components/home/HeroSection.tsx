@@ -25,7 +25,7 @@ export function HeroSection({ status }: HeroSectionProps) {
       >
         <div className="mc-panel-raised pixel-corners pixel-slot px-6 py-2">
           <span className="font-mc-sub text-accent text-[11px] sm:text-xs tracking-widest uppercase mc-text-shadow">
-            Project Sulfuria // Help us reach 50 Survivors
+            Project Sulfuria
           </span>
         </div>
 
@@ -79,7 +79,8 @@ export function HeroSection({ status }: HeroSectionProps) {
           Fabric mods. One life.*
         </p>
         <p className="font-mc-body text-[11px] text-foreground/40 max-w-xl mx-auto mb-10">
-          *Up to two additional lives may be purchased via the Store.
+          *Hardcore Lite (Life Drain): deaths drain hearts, not lives. One
+          additional life may be purchased via the Store.
         </p>
       </motion.div>
 

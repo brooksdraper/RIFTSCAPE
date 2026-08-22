@@ -35,8 +35,10 @@ const emptySubscribe = () => () => {};
 const TIERS: EnrolledPlayer["tier"][] = [
   "member",
   "survivor",
-  "supporter",
-  "sponsor",
+  "voyager",
+  "weaver",
+  "sentinel",
+  "archon",
 ];
 
 /**
@@ -312,7 +314,7 @@ function ManageMemberModalContent({
           <label className="block font-mc-sub text-[9px] text-foreground/40 tracking-widest uppercase mb-2">
             Tier
           </label>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             {TIERS.map((tier) => {
               const meta = TIER_META[tier];
               const active = player.tier === tier;

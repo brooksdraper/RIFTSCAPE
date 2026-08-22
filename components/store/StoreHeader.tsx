@@ -50,7 +50,7 @@ export function StoreHeader() {
               purchases directly support server hosting and development.
             </p>
             <p className="font-mc-body text-[11px] text-foreground/50 max-w-xl mx-auto leading-relaxed">
-              Extra lives are capped at two per account. Tags and perks are
+              An extra life is capped at one per account. Tags and perks are
               valid for the current 60-Day season only and do not carry over.
               Lives cannot be gifted or transferred. All purchases are final and
               non-refundable.

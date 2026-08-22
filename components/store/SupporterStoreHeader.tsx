@@ -34,7 +34,7 @@ export function SupporterStoreHeader() {
 
         <div className="relative z-10 px-6 py-20 md:py-24 text-center">
           <span className="inline-block mc-panel-raised pixel-corners pixel-slot font-mc-sub text-accent text-[11px] sm:text-xs tracking-widest uppercase px-6 py-2 mb-6 mc-text-shadow">
-            Supporter Perks
+            Rank Perks
           </span>
           <h1 className="font-mc-header text-3xl sm:text-4xl md:text-5xl text-white mb-5 mc-text-shadow leading-relaxed">
             Cosmetic <span className="text-accent">Vault</span>
@@ -45,8 +45,8 @@ export function SupporterStoreHeader() {
             hours of online play, and the rest comes with a tag.
           </p>
           <p className="font-mc-body text-[11px] text-foreground/50 max-w-xl mx-auto leading-relaxed">
-            Tags are cumulative: each one unlocks everything below it, so a
-            Sponsor holds the whole vault. Cosmetics are cosmetic — none of them
+            Tags are cumulative: each one unlocks everything below it, so an
+            Archon holds the whole vault. Cosmetics are cosmetic — none of them
             affect combat, loot, or the 60-day timer, and all of them reset at
             the end of the season.
           </p>

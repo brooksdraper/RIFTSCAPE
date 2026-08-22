@@ -64,6 +64,41 @@ export const WIKI_DATA: WikiItem[] = [
     recipe: ["1x Lily Bud", "2x Sugar Cane Fibers"],
   },
   {
+    id: "coin-silver",
+    name: "Silver Coin",
+    tagline: "Common currency scavenged from the fallen.",
+    description:
+      "A tarnished silver coin dropped by slain zombies. Traded and hoarded across the wasteland, and prized by tinkerers who know it can be reforged into something far more valuable.",
+    icon: "flask",
+    iconUrl: "/img/coin_silver.png",
+    rarity: "Common",
+    roleOrType: "Currency",
+    abilitiesOrEffects: [
+      "Zombie Drop: 1/6 chance to drop from a slain Zombie.",
+      "Crafting Ingredient: Surround with Gold Nuggets in a crafting table to forge Gold Coins.",
+    ],
+    recipe: ["Dropped by: Zombie (1/6 chance)"],
+  },
+  {
+    id: "coin-gold",
+    name: "Gold Coin",
+    tagline: "Rare coin forged by reworking silver with gold nuggets.",
+    description:
+      "A gleaming gold coin, minted by surrounding a Silver Coin with Gold Nuggets in a crafting table. Far scarcer than its silver counterpart and sought after for high-value trades.",
+    icon: "flask",
+    iconUrl: "/img/coin_gold.png",
+    rarity: "Rare",
+    roleOrType: "Currency",
+    abilitiesOrEffects: [
+      "Crafting Output: 1x Silver Coin surrounded by 8x Gold Nuggets yields 2x Gold Coins.",
+    ],
+    recipe: [
+      "1x Silver Coin (center)",
+      "8x Gold Nuggets (surrounding)",
+      "Yields 2x Gold Coin",
+    ],
+  },
+  {
     id: "infection-effect",
     name: "Infection Effect",
     tagline:

@@ -3,18 +3,25 @@
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
-import type { StoreItem } from "@/lib/store/store-items";
+import {
+  getUpgradePriceCents,
+  formatPriceCents,
+  type StoreItem,
+} from "@/lib/store/store-items";
+import type { EnrolledPlayer } from "@/lib/players";
 import { Gift, Info } from "lucide-react";
 
 interface CheckoutModalProps {
   item: StoreItem | null;
   defaultRecipient: string;
+  currentTier: EnrolledPlayer["tier"] | null;
   onClose: () => void;
 }
 
 export function CheckoutModal({
   item,
   defaultRecipient,
+  currentTier,
   onClose,
 }: CheckoutModalProps) {
   return (
@@ -24,6 +31,7 @@ export function CheckoutModal({
           key={item.id}
           item={item}
           defaultRecipient={defaultRecipient}
+          currentTier={currentTier}
           onClose={onClose}
         />
       )}
@@ -34,12 +42,14 @@ export function CheckoutModal({
 interface CheckoutModalContentProps {
   item: StoreItem;
   defaultRecipient: string;
+  currentTier: EnrolledPlayer["tier"] | null;
   onClose: () => void;
 }
 
 function CheckoutModalContent({
   item,
   defaultRecipient,
+  currentTier,
   onClose,
 }: CheckoutModalContentProps) {
   const canGift = item.giftable !== false;
@@ -51,6 +61,14 @@ function CheckoutModalContent({
   const recipient = canGift && isGift ? giftRecipient : defaultRecipient;
 
   const canCheckout = recipient.trim().length > 0;
+
+  // A gift grants the recipient's own account that rank from scratch, so it's
+  // never an "upgrade" off the buyer's own tier — only a self-purchase prices
+  // against what the buyer already holds.
+  const priceCents =
+    canGift && isGift ? item.priceCents : getUpgradePriceCents(item, currentTier);
+  const priceLabel = formatPriceCents(priceCents);
+  const isUpgrade = priceCents < item.priceCents;
 
   const handleCheckout = async () => {
     if (!canCheckout) return;
@@ -199,10 +217,17 @@ function CheckoutModalContent({
         <div className="space-y-4 mb-6 pb-6 border-b-2 border-black">
           <div className="flex items-center justify-between">
             <span className="font-mc-sub text-[9px] text-foreground/40 tracking-widest uppercase">
-              Total Due
+              {isUpgrade ? "Your Upgrade Price" : "Total Due"}
             </span>
-            <span className="font-mc-header text-lg text-accent mc-text-shadow">
-              {item.price}
+            <span className="flex items-baseline gap-2">
+              {isUpgrade && (
+                <span className="font-mc-body text-xs text-foreground/40 line-through">
+                  {item.price}
+                </span>
+              )}
+              <span className="font-mc-header text-lg text-accent mc-text-shadow">
+                {priceLabel}
+              </span>
             </span>
           </div>
 
@@ -236,7 +261,7 @@ function CheckoutModalContent({
         >
           {status === "loading"
             ? "Redirecting..."
-            : `Pay ${item.price} + Tax Securely →`}
+            : `Pay ${priceLabel} + Tax Securely →`}
         </button>
       </motion.div>
     </motion.div>

@@ -63,6 +63,24 @@
   --mc-danger: #ff5555;
   --mc-success: #55ff55;
   --mc-info: #55ffff;
+
+  /* Vanilla text colors — the 16 default Minecraft chat/dye colors. */
+  --mc-black: #000000;
+  --mc-dark-blue: #0000aa;
+  --mc-dark-green: #00aa00;
+  --mc-dark-aqua: #00aaaa;
+  --mc-dark-red: #aa0000;
+  --mc-dark-purple: #aa00aa;
+  --mc-gold: #ffaa00;
+  --mc-gray: #aaaaaa;
+  --mc-dark-gray: #555555;
+  --mc-blue: #5555ff;
+  --mc-green: #55ff55;
+  --mc-aqua: #55ffff;
+  --mc-red: #ff5555;
+  --mc-light-purple: #ff55ff;
+  --mc-yellow: #ffff55;
+  --mc-white: #ffffff;
 }
 
 body {
@@ -467,7 +485,14 @@ body {
    invisible.                                                             */
 .mc-marquee-track {
   width: max-content;
-  animation: mc-marquee-scroll 22s linear infinite;
+  animation: mc-marquee-scroll var(--marquee-duration, 22s) linear infinite;
+}
+
+/* Opt-in pause: wrap a track in .mc-marquee-viewport to let a player stop
+   the scroll on hover/focus, e.g. to read a card before it slides past. */
+.mc-marquee-viewport:hover .mc-marquee-track,
+.mc-marquee-viewport:focus-within .mc-marquee-track {
+  animation-play-state: paused;
 }
 
 .mc-marquee-content {
@@ -488,6 +513,10 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .mc-marquee-track {
     animation: none;
+  }
+
+  .mc-marquee-viewport {
+    overflow-x: auto;
   }
 }
 
